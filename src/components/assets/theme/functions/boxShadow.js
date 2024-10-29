@@ -18,8 +18,8 @@ Coded by www.creative-tim.com
  */
 
 // Material Dashboard 2 React helper functions
-import rgba from "../../functions/rgba";
-import pxToRem from "../../functions/pxToRem";
+import rgba from "../functions/rgba";
+import pxToRem from "../functions/pxToRem";
 
 function boxShadow(offset = [], radius = [], color, opacity, inset = "") {
   const [x, y] = offset;

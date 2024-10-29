@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 React helper functions
-import pxToRem from "../../functions/pxToRem";
+import pxToRem from "../../theme/functions/pxToRem";
 
 const svgIcon = {
   defaultProps: {

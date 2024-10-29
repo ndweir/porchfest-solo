@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 React base styles
-import borders from "../../base/borders";
+import borders from "../base/borders";
 
 const { borderRadius } = borders;
 

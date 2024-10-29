@@ -14,11 +14,11 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 React base styles
-import colors from "../../base/colors";
+import colors from "../base/colors";
 
 // Material Dashboard 2 React helper functions
-import rgba from "../../functions/rgba";
-import pxToRem from "../../functions/pxToRem";
+import rgba from "../functions/rgba";
+import pxToRem from "../functions/pxToRem";
 
 const { dark, transparent, white } = colors;
 

@@ -14,11 +14,11 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 React base styles
-import colors from "../../base/colors";
-import borders from "../../base/borders";
+import colors from "../base/colors";
+import borders from "../base/borders";
 
 // Material Dashboard 2 React helper functions
-import pxToRem from "../../functions/pxToRem";
+import pxToRem from "../functions/pxToRem";
 
 const { white } = colors;
 const { borderRadius } = borders;

@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 React Base Styles
-import colors from "../../base/colors";
+import colors from "../base/colors";
 
 const { transparent } = colors;
 

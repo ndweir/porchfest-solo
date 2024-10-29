@@ -19,7 +19,7 @@ import borders from "../../base/borders";
 import boxShadows from "../../base/boxShadows";
 
 // Material Dashboard 2 React helper functions
-// import rgba from "../../functions/rgba";
+ import rgba from "../../functions/rgba";
 import pxToRem from "../../functions/pxToRem";
 import linearGradient from "../../functions/linearGradient";
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Navigate} from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 import LoginPage from '../LoginPage/LoginPage';
 import {useSelector} from 'react-redux';
 
@@ -22,20 +22,26 @@ function ProtectedRoute({ component, children, ...props }) {
 
   // We return a Route component that gets added to our list of routes
   return (
-    <Route
-      // all props like 'exact' and 'path' that were passed in
-      // are now passed along to the 'Route' Component
-      {...props}
-    >
-      {user.id ?
-        // If the user is logged in, show the protected component
-        <ProtectedComponent />
-        :
-        // Otherwise, redirect to the Loginpage
-        <LoginPage />
-      }
-    </Route>
 
+        
+          <React.Fragment> 
+          {/* // all props like 'exact' and 'path' that were passed in
+          // are now passed along to the 'Route' Component */}
+          {/* {...props} */}
+         
+          {user.id ?
+            // If the user is logged in, show the protected component
+            
+            <ProtectedComponent />
+            
+            :
+            // Otherwise, redirect to the Loginpage
+            
+            <LoginPage />
+            
+          }
+        
+        </React.Fragment>  
   );
 }
 

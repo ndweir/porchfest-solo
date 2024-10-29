@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import {
   HashRouter as Router,
   Redirect,
   Route,
   Switch,
+  Navigate,
+  useLocation,
 } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,10 +21,23 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+// @mui material components
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import themeRTL from "../assets/../theme-rtl";
+import rtlPlugin from "stylis-plugin-rtl";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
 
+
+// Material Dashboard 2 React themes
+import theme from "../assets/theme";
 import './App.css';
 
 function App() {
+ 
+
+
   const dispatch = useDispatch();
 
   const user = useSelector(store => store.user);
@@ -32,6 +47,10 @@ function App() {
   }, [dispatch]);
 
   return (
+
+    <CacheProvider value={rtlCache}>
+    <ThemeProvider theme={theme}>
+    <CssBaseline />
     <Router>
       <div>
         <Nav />
@@ -118,6 +137,8 @@ function App() {
         <Footer />
       </div>
     </Router>
+  </ThemeProvider>
+  </CacheProvider>
   );
 }
 

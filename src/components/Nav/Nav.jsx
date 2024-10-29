@@ -3,9 +3,70 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
+import Box from '@mui/material/Box';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+import { useNavigate } from 'react-router-dom';
 
 function Nav() {
   const user = useSelector((store) => store.user);
+
+
+const navigate = useNavigate();
+const [state, setState] = React.useState({
+  top: false,
+  left: false,
+  bottom: false,
+  right: false,
+});
+
+const toggleDrawer = (anchor, open) => (event) => {
+  if (
+    event &&
+    event.type === 'keydown' &&
+    (event.key === 'Tab' || event.key === 'Shift')
+  ) {
+    return;
+  }
+
+  setState({ ...state, [anchor]: open });
+};
+
+const list = (anchor) => (
+  <Box>
+    <List>
+      {['Dashboard', 'About', 'Info', 'Log Out'].map((text, index) => (
+        <ListItem key={text} disablePadding>
+          <ListItemButton
+            onClick={() => {
+              if (text === 'Dashboard') {
+                navigate('/user');
+              } else if (text === 'About') {
+                navigate('/about');
+              } else if (text === 'Log Out') {
+                navigate('/logout');
+              } else if (text === 'Info') {
+                navigate('/info');
+              }
+            }}
+          >
+            <ListItemText primary={text} />
+          </ListItemButton>
+        </ListItem>
+      ))}
+    </List>
+  </Box>
+);
+
+
 
   return (
     <div className="nav">
@@ -25,22 +86,22 @@ function Nav() {
 
         {/* If a user is logged in, show these links */}
         {user.id && (
-          <>
-         
-
-            
-
-            <Link className="navLink" to="/info">
-              Info Page
-            </Link>
-
-            <LogOutButton className="navLink" />
-          </>
+            <div>
+            {['left'].map((anchor) => (
+              <React.Fragment key={anchor}>
+                <Button onClick={toggleDrawer('left', true)}>Navigation</Button>
+                <SwipeableDrawer
+                  anchor={anchor}
+                  open={state[anchor]}
+                  onClose={toggleDrawer(anchor, false)}
+                  onOpen={toggleDrawer(anchor, true)}
+                >
+                  {list(anchor)}
+                </SwipeableDrawer>
+              </React.Fragment>
+            ))}
+          </div>
         )}
-
-        <Link className="navLink" to="/about">
-          About
-        </Link>
       </div>
     </div>
   );

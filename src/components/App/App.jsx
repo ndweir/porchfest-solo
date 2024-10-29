@@ -18,6 +18,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import LogOutPage from '../LogOutPage/LogOutPage';
 // @mui material components
 
 
@@ -46,6 +47,7 @@ function App() {
               <Route path= "/" element={<Navigate  to="/home"/>} />
               <Route path= "/about" element={<AboutPage />} />
               <Route path= "/user" element={<ProtectedRoute isAuthenticated={user.isAuthenticated}  ><UserPage /></ProtectedRoute>} />
+              <Route path= "/logout" element={<ProtectedRoute isAuthenticated={user.isAuthenticated}  ><LogOutPage /></ProtectedRoute>} />
               <Route path= "/info" element={<ProtectedRoute isAuthenticated={user.isAuthenticated}  ><InfoPage /></ProtectedRoute>} />
               <Route path= "/registration" element={user.id ? <Navigate to="/user" />  :  <RegisterPage />  } /> 
               <Route path= "/home" element={user.id ? <Navigate to="/user" /> : <LandingPage />} />

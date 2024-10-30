@@ -22,6 +22,7 @@ const listItem = {
     root: {
       paddingTop: 0,
       paddingBottom: 0,
+      justifyContent: 'space-evenly',
     },
   },
 };

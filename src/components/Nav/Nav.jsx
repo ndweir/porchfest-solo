@@ -15,6 +15,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -89,7 +90,9 @@ const list = (anchor) => (
             <div>
             {['left'].map((anchor) => (
               <React.Fragment key={anchor}>
-                <Button onClick={toggleDrawer('left', true)}>Navigation</Button>
+                <Button onClick={toggleDrawer('left', true)}
+                style={{color: 'white', backgroundColor: 'black'}}
+                >Navigation</Button>
                 <SwipeableDrawer
                   anchor={anchor}
                   open={state[anchor]}

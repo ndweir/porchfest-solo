@@ -19,6 +19,9 @@ import styled from 'styled-components';
 import DensityMediumSharpIcon from '@mui/icons-material/DensityMediumSharp';
 
 function Nav() {
+
+
+  let navBarArray = ['Dashboard', 'Unranked', 'Previous', 'Log Out'];
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
   const [state, setState] = React.useState({
@@ -27,6 +30,15 @@ function Nav() {
   bottom: false,
   right: false,
   });
+
+  if(user.type === 'Artist'){
+    navBarArray = ['Dashboard', 'Rank Venues', 'Previous Ranked', 'Log Out']
+  } else if(user.type === 'Venue'){
+    navBarArray = ['Dashboard', 'Rank Artists', 'Previous Ranked', 'Log Out']
+  } else {
+    navBarArray = ['Dashboard', 'Current Matching', 'Log Out']
+  }
+
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -41,21 +53,26 @@ function Nav() {
   };
 
   const list = (anchor) => (
+    
+
+
     <Box>
       <List>
-        {['Dashboard', 'About', 'Info', 'Log Out'].map((text, index) => (
+        {navBarArray.map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton
               onClick={() => {
                 if (text === 'Dashboard') {
                   navigate('/user');
-                } else if (text === 'About') {
+                } else if (text === 'Rank Venues') {
+                  navigate('/about');
+                } else if (text === 'Rank Artists') {
                   navigate('/about');
                 } else if (text === 'Log Out') {
                   navigate('/logout');
-                } else if (text === 'Info') {
+                } else if (text === 'Previous Ranked') {
                   navigate('/info');
-                }
+                } 
               }}
             >
               <ListItemText primary={text} />

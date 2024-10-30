@@ -92,6 +92,11 @@ Button
   color: #000000;
 }
 
+.radio-btn-registration{
+  display: flex;
+  justify-content: space-evenly;
+}
+
 /* --------------------------------------------------------------------------------
 Alert
 -------------------------------------------------------------------------------- */
@@ -125,4 +130,9 @@ Form Treatment
 input {
   margin: 5px;
   margin-bottom: 10px;
+}
+
+.checkbox{
+  display: flex;
+  flex-direction: column;
 }

@@ -19,62 +19,60 @@ import styled from 'styled-components';
 
 function Nav() {
   const user = useSelector((store) => store.user);
-
-
-const navigate = useNavigate();
-const [state, setState] = React.useState({
+  const navigate = useNavigate();
+  const [state, setState] = React.useState({
   top: false,
   left: false,
   bottom: false,
   right: false,
-});
+  });
 
-const toggleDrawer = (anchor, open) => (event) => {
-  if (
-    event &&
-    event.type === 'keydown' &&
-    (event.key === 'Tab' || event.key === 'Shift')
-  ) {
-    return;
-  }
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event &&
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      return;
+    }
 
-  setState({ ...state, [anchor]: open });
-};
+    setState({ ...state, [anchor]: open });
+  };
 
-const list = (anchor) => (
-  <Box>
-    <List>
-      {['Dashboard', 'About', 'Info', 'Log Out'].map((text, index) => (
-        <ListItem key={text} disablePadding>
-          <ListItemButton
-            onClick={() => {
-              if (text === 'Dashboard') {
-                navigate('/user');
-              } else if (text === 'About') {
-                navigate('/about');
-              } else if (text === 'Log Out') {
-                navigate('/logout');
-              } else if (text === 'Info') {
-                navigate('/info');
-              }
-            }}
-          >
-            <ListItemText primary={text} />
-          </ListItemButton>
-        </ListItem>
-      ))}
-    </List>
-  </Box>
-);
+  const list = (anchor) => (
+    <Box>
+      <List>
+        {['Dashboard', 'About', 'Info', 'Log Out'].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton
+              onClick={() => {
+                if (text === 'Dashboard') {
+                  navigate('/user');
+                } else if (text === 'About') {
+                  navigate('/about');
+                } else if (text === 'Log Out') {
+                  navigate('/logout');
+                } else if (text === 'Info') {
+                  navigate('/info');
+                }
+              }}
+            >
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
 
 
 
   return (
     <div className="nav">
       <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
+        <h2 className="nav-title">Porchfest</h2>
       </Link>
-      <div>
+    <div>
         {/* If no user is logged in, show these links */}
         {!user.id && (
           // If there's no user, show login/registration links

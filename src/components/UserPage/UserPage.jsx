@@ -137,13 +137,14 @@ function UserPage() {
   return (
     <>
      <div className="container">
-      <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
+      <h1>Welcome, {user.username}!</h1>
+        <p>Your ID is: {user.id}</p>
+        <h2 style={{display:'flex', justifyContent: 'center'}}>{user.type} Dashboard</h2>
       </div>
-
+      
       <div className='div-imageList-title'>
-        <h3>Unranked</h3>
-        <h3>Previously Ranked</h3>
+        <h3>Unranked {user.type === 'Artist' ? 'Venues' : 'Artists'}</h3>
+        <h3>Previously Ranked {user.type === 'Artist' ? 'Venues' : 'Artists'} </h3>
       </div>
       
     <div className='image-list-div'>

@@ -136,3 +136,8 @@ input {
   display: flex;
   flex-direction: column;
 }
+
+.rankTitles{
+  display: flex;
+  justify-content: space-evenly;
+}

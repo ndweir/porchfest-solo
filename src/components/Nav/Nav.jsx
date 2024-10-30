@@ -16,6 +16,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import DensityMediumSharpIcon from '@mui/icons-material/DensityMediumSharp';
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -90,7 +91,7 @@ function Nav() {
               <React.Fragment key={anchor}>
                 <Button onClick={toggleDrawer('left', true)}
                 style={{color: 'white', backgroundColor: 'black'}}
-                >Navigation</Button>
+                ><DensityMediumSharpIcon></DensityMediumSharpIcon></Button>
                 <SwipeableDrawer
                   anchor={anchor}
                   open={state[anchor]}

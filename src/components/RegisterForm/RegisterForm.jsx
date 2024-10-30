@@ -99,11 +99,11 @@ function RegisterForm() {
 
       <div className='radio-btn-registration'>
       <label>
-        <input type="radio" name="accountTypeRadio" value="Artist" onChange={changeType} checked={type === "Artist"} required={type === "Artist" ? false : true}  />
+        <input type="radio" name="accountTypeRadio" value="Artist" onChange={changeType} checked={type === "Artist"} required={type === "Artist" || type === "Admin" ? false : true}  />
         Artist
       </label>
       <label>
-        <input type="radio" name="accountTypeRadio" value="Venue" onChange={changeType} checked={type === "Venue"} required={type === "Venue" ? false : true}  />
+        <input type="radio" name="accountTypeRadio" value="Venue" onChange={changeType} checked={type === "Venue"} required={type === "Venue" || type === "Admin" ? false : true}  />
         Venue
       </label>
       </div>

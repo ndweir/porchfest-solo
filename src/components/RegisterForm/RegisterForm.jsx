@@ -8,8 +8,6 @@ function RegisterForm() {
   const [type, setType] = useState('')
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
-  const venueCount = 0;
-  const artistCount = 0;
   
   const changeType = (event) => {
    

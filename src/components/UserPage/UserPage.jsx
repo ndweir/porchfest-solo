@@ -7,11 +7,48 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import dreyDk from '../ArtistPhotos/dreyDk.jpeg'
 import AnnieBang from '../ArtistPhotos/Annie and the Bang Bang_SmouseintheHouse-6 - Annie Enneking.jpg'
 import CheapBouquet from '../ArtistPhotos/CheapBouquet.jpg'
+import HoneyPlease from '../ArtistPhotos/HoneyPlease.jpeg'
+import KingSizedCoffin from '../ArtistPhotos/KingSizedCoffin.jpg'
+import MommyLogBalls from '../ArtistPhotos/MommyLogBalls.jpeg'
+import PityParty from '../ArtistPhotos/pityParty.jpg'
+import TheWalkerBrothers from '../ArtistPhotos/TheWalkerBrothersBand.jpg'
+import TheWeepingCovenant from '../ArtistPhotos/theWeepingCovenant.jpg'
+import AtomicLights from '../ArtistPhotos/AtomicLights.jpeg'
+import SeyiOyinloye from '../ArtistPhotos/SeyiOyinloye.jpg'
+import RanchoUnicorno from '../ArtistPhotos/RanchoUnicorno.jpg'
 
+import RadioDr from '../VenuePhotos/RadioDr.jpeg'
+import BryantAve from '../VenuePhotos/BryantAve.jpeg'
+import DaleSt from '../VenuePhotos/DaleSt.jpeg'
+import DupontAve from '../VenuePhotos/DupontAve.jpeg'
+import GrandAve from '../VenuePhotos/GrandAve.jpeg'
+import HennepinAve from '../VenuePhotos/HennepinAve.jpeg'
+import IrvingAve from '../VenuePhotos/IrvingAve.jpeg'
+import JeffersonAve from '../VenuePhotos/JeffersonAve.jpeg'
+import LakeSt from '../VenuePhotos/LakeSt.jpeg'
+import LincolnAve from '../VenuePhotos/LincolnAve.jpeg'
+import LyndaleAve from '../VenuePhotos/LyndaleAve.jpeg'
+import SummitAve from '../VenuePhotos/SummitAve.jpeg'
 
 function UserPage() {
 
   const itemData = [
+    {
+      img: SeyiOyinloye,
+      title: 'Seyi Oyinloye',
+    },
+    {
+      img: RanchoUnicorno,
+      title: 'Rancho Unicorno',
+    },
+    {
+      img: MommyLogBalls,
+      title: 'Mommy Log Balls',
+    },
+    {
+      img: PityParty,
+      title: 'Pity Party',
+    },
     {
       img: dreyDk,
       title: 'drey dk',
@@ -21,95 +58,79 @@ function UserPage() {
       title: 'Annie and the Bang Bang',
     },
     {
-      img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-      title: 'Camera',
+      img: AtomicLights,
+      title: 'Atomic Lights',
     },
     {
-      img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-      title: 'Coffee',
+      img: CheapBouquet,
+      title: 'Cheap Bouquet',
     },
     {
-      img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
-      title: 'Hats',
+      img: HoneyPlease,
+      title: 'Honey Please',
     },
     {
-      img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
-      title: 'Honey',
+      img: KingSizedCoffin,
+      title: 'King Sized Coffin',
     },
     {
-      img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
-      title: 'Basketball',
+      img: TheWalkerBrothers,
+      title: 'The Walker Brothers',
     },
     {
-      img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
-      title: 'Fern',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
-      title: 'Mushrooms',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
-      title: 'Tomato basil',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
-      title: 'Sea star',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
-      title: 'Bike',
+      img: TheWeepingCovenant,
+      title: 'The Weeping Covenant',
     },
   ];
 
   const itemData2 = [
     {
-      img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
-      title: 'Breakfast',
+      img: RadioDr,
+      title: '3 Radio Dr',
     },
     {
-      img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-      title: 'Burger',
+      img: SummitAve,
+      title: '1006 Summit Ave',
     },
     {
-      img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-      title: 'Camera',
+      img: BryantAve,
+      title: '824 Bryant Ave',
     },
     {
-      img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-      title: 'Coffee',
+      img: DaleSt,
+      title: '1738 Dale St',
     },
     {
-      img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
-      title: 'Hats',
+      img: DupontAve,
+      title: '540 Dupont Ave',
     },
     {
-      img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
-      title: 'Honey',
+      img: GrandAve,
+      title: '1979 Grand Ave',
     },
     {
-      img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
-      title: 'Basketball',
+      img: HennepinAve,
+      title: '901 Hennepin Ave',
     },
     {
-      img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
-      title: 'Fern',
+      img: IrvingAve,
+      title: '2292 Irving Ave',
     },
     {
-      img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
-      title: 'Mushrooms',
+      img: JeffersonAve,
+      title: '2229 Jefferson Ave',
     },
     {
-      img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
-      title: 'Tomato basil',
+      img: LakeSt,
+      title: '1999 Lake St',
     },
     {
-      img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
-      title: 'Sea star',
+      img: LincolnAve,
+      title: '5390 Lincoln Ave',
     },
     {
-      img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
-      title: 'Bike',
+      img: LyndaleAve,
+      title: '5136 Lyndale Ave',
     },
   ];
 

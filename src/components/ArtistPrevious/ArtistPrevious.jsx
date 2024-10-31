@@ -15,11 +15,56 @@ import LincolnAve from '../VenuePhotos/LincolnAve.jpeg'
 import LyndaleAve from '../VenuePhotos/LyndaleAve.jpeg'
 import SummitAve from '../VenuePhotos/SummitAve.jpeg'
 
+import PropTypes from 'prop-types';
+import { styled } from '@mui/material/styles';
+import Rating from '@mui/material/Rating';
+import MusicNoteSharpIcon from '@mui/icons-material/MusicNoteSharp';
+import { sizeof } from 'stylis';
+
 export default function ArtistPrevious(){
-    
+    const StyledRating = styled(Rating)(({ theme }) => ({
+        '& .MuiRating-iconEmpty .MuiSvgIcon-root': {
+          color: theme.palette.action.disabled,
+        },
+      }));
+      
+      const customIcons = {
+        1: {
+          icon: <MusicNoteSharpIcon  color="error" />,
+          label: 'Yikes',
+        },
+        2: {
+          icon: <MusicNoteSharpIcon  color="yellow" />,
+          label: 'Meh',
+        },
+        3: {
+          icon: <MusicNoteSharpIcon  color="blue" />,
+          label: 'OK',
+        },
+        4: {
+          icon: <MusicNoteSharpIcon  color="success" />,
+          label: 'Great',
+        },
+        5: {
+          icon: <MusicNoteSharpIcon  color="success" />,
+          label: 'Amazing',
+        },
+      };
+      
+      function IconContainer(props) {
+        const { value, ...other } = props;
+        return <span {...other}>
+        <div>{customIcons[value].icon}</div>
+        <h6>{customIcons[value].label}</h6>
+        </span>;
+      }
+      
+      IconContainer.propTypes = {
+        value: PropTypes.number.isRequired,
+      };
 
     return (
-        <div className="container">
+        <div className="container" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
             <h1>Previously Ranked Venues</h1>
     <div className='rankTitles'>
       <h2>Previous</h2>
@@ -50,7 +95,15 @@ export default function ArtistPrevious(){
   </Stack>
 
   <form style={{display: 'flex', justifyContent: 'center'}}>
-      <input placeholder='Rank'></input>
+  <StyledRating
+            name="highlight-selected-only"
+            defaultValue={3}
+            IconContainerComponent={IconContainer}
+            getLabelText={(value) => customIcons[value].label}
+            highlightSelectedOnly
+            size='large'
+            isRequired={true}
+          />
       <button className='btn'>Submit</button>
       <button className='btn'>Skip</button>
     </form>

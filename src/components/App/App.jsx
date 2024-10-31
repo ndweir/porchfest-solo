@@ -45,7 +45,7 @@ function App() {
                 <Nav />
                 <Routes>
                   <Route path= "/" element={<Navigate  to="/home"/>} />
-                  <Route path= "/about" element={<AboutPage />} />
+                  <Route path= "/about" element={<ProtectedRoute isAuthenticated={user.isAuthenticated}  ><AboutPage /></ProtectedRoute>} />
                   <Route path= "/user" element={<ProtectedRoute isAuthenticated={user.isAuthenticated}  ><UserPage /></ProtectedRoute>} />
                   <Route path= "/logout" element={<ProtectedRoute isAuthenticated={user.isAuthenticated}  ><LogOutPage /></ProtectedRoute>} />
                   <Route path= "/info" element={<ProtectedRoute isAuthenticated={user.isAuthenticated}  ><InfoPage /></ProtectedRoute>} />

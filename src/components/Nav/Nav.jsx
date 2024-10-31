@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
@@ -17,13 +17,14 @@ import MailIcon from '@mui/icons-material/Mail';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import DensityMediumSharpIcon from '@mui/icons-material/DensityMediumSharp';
+import LogoutSharpIcon from '@mui/icons-material/LogoutSharp';
 
 function Nav() {
 
-
-  let navBarArray = ['Dashboard', 'Unranked', 'Previous', 'Log Out'];
+  let navBarArray = [`Dashboard`, 'Unranked', 'Previous', `Log Out`];
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [state, setState] = React.useState({
   top: false,
   left: false,
@@ -32,11 +33,11 @@ function Nav() {
   });
 
   if(user.type === 'Artist'){
-    navBarArray = ['Dashboard', 'Rank Venues', 'Previous Ranked', 'Log Out']
+    navBarArray = ['Dashboard', 'Rank Venues', 'Previous Ranked', `Log Out`]
   } else if(user.type === 'Venue'){
-    navBarArray = ['Dashboard', 'Rank Artists', 'Previous Ranked', 'Log Out']
+    navBarArray = ['Dashboard', 'Rank Artists', 'Previous Ranked', `Log Out`]
   } else {
-    navBarArray = ['Dashboard', 'Current Matching', 'Log Out']
+    navBarArray = ['Dashboard', 'Current Matching', `Log Out`]
   }
 
 
@@ -68,10 +69,10 @@ function Nav() {
                   navigate('/about');
                 } else if (text === 'Rank Artists') {
                   navigate('/about');
-                } else if (text === 'Log Out') {
-                  navigate('/logout');
+                } else if (text === `Log Out`) {
+                  dispatch({ type: 'LOGOUT' })
                 } else if (text === 'Previous Ranked') {
-                  navigate('/info');
+                  navigate('/info')
                 } 
               }}
             >

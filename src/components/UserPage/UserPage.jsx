@@ -4,17 +4,22 @@ import {useSelector} from 'react-redux';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
+import dreyDk from '../ArtistPhotos/dreyDk.jpeg'
+import AnnieBang from '../ArtistPhotos/Annie and the Bang Bang_SmouseintheHouse-6 - Annie Enneking.jpg'
+import CheapBouquet from '../ArtistPhotos/CheapBouquet.jpg'
+import DiveBarOrchestra from '../ArtistPhotos/DiveBarOrchestra.JPG'
+
 
 function UserPage() {
 
   const itemData = [
     {
-      img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
-      title: 'Breakfast',
+      img: dreyDk,
+      title: 'drey dk',
     },
     {
-      img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-      title: 'Burger',
+      img: AnnieBang,
+      title: 'Annie and the Bang Bang',
     },
     {
       img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',

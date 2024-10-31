@@ -7,7 +7,6 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import dreyDk from '../ArtistPhotos/dreyDk.jpeg'
 import AnnieBang from '../ArtistPhotos/Annie and the Bang Bang_SmouseintheHouse-6 - Annie Enneking.jpg'
 import CheapBouquet from '../ArtistPhotos/CheapBouquet.jpg'
-import DiveBarOrchestra from '../ArtistPhotos/DiveBarOrchestra.JPG'
 
 
 function UserPage() {

@@ -17,22 +17,9 @@ import AtomicLights from '../ArtistPhotos/AtomicLights.jpeg'
 import SeyiOyinloye from '../ArtistPhotos/SeyiOyinloye.jpg'
 import RanchoUnicorno from '../ArtistPhotos/RanchoUnicorno.jpg'
 
-import RadioDr from '../VenuePhotos/RadioDr.jpeg'
-import BryantAve from '../VenuePhotos/BryantAve.jpeg'
-import DaleSt from '../VenuePhotos/DaleSt.jpeg'
-import DupontAve from '../VenuePhotos/DupontAve.jpeg'
-import GrandAve from '../VenuePhotos/GrandAve.jpeg'
-import HennepinAve from '../VenuePhotos/HennepinAve.jpeg'
-import IrvingAve from '../VenuePhotos/IrvingAve.jpeg'
-import JeffersonAve from '../VenuePhotos/JeffersonAve.jpeg'
-import LakeSt from '../VenuePhotos/LakeSt.jpeg'
-import LincolnAve from '../VenuePhotos/LincolnAve.jpeg'
-import LyndaleAve from '../VenuePhotos/LyndaleAve.jpeg'
-import SummitAve from '../VenuePhotos/SummitAve.jpeg'
-
 export default function VenueDashboard(){
     
-  const itemData = [
+  const ArtistData = [
     {
       img: SeyiOyinloye,
       title: 'Seyi Oyinloye',
@@ -83,57 +70,6 @@ export default function VenueDashboard(){
     },
   ];
 
-  const itemData2 = [
-    {
-      img: RadioDr,
-      title: '3 Radio Dr',
-    },
-    {
-      img: SummitAve,
-      title: '1006 Summit Ave',
-    },
-    {
-      img: BryantAve,
-      title: '824 Bryant Ave',
-    },
-    {
-      img: DaleSt,
-      title: '1738 Dale St',
-    },
-    {
-      img: DupontAve,
-      title: '540 Dupont Ave',
-    },
-    {
-      img: GrandAve,
-      title: '1979 Grand Ave',
-    },
-    {
-      img: HennepinAve,
-      title: '901 Hennepin Ave',
-    },
-    {
-      img: IrvingAve,
-      title: '2292 Irving Ave',
-    },
-    {
-      img: JeffersonAve,
-      title: '2229 Jefferson Ave',
-    },
-    {
-      img: LakeSt,
-      title: '1999 Lake St',
-    },
-    {
-      img: LincolnAve,
-      title: '5390 Lincoln Ave',
-    },
-    {
-      img: LyndaleAve,
-      title: '5136 Lyndale Ave',
-    },
-  ];
-
   const user = useSelector((store) => store.user);
   return (
     <>
@@ -151,7 +87,7 @@ export default function VenueDashboard(){
     <div className='image-list-div'>
     <React.Fragment>
       <ImageList sx={{ width: 500, height: 450 }}>
-      {itemData.map((item) => (
+      {ArtistData.map((item) => (
         <ImageListItem key={item.img}>
           <img
             srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
@@ -170,7 +106,7 @@ export default function VenueDashboard(){
     
     <div>
       <ImageList sx={{ width: 500, height: 450 }}>
-      {itemData.map((item) => (
+      {ArtistData.map((item) => (
         <ImageListItem key={item.img}>
           <img
             srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}

@@ -4,18 +4,6 @@ import {useSelector} from 'react-redux';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
-import dreyDk from '../ArtistPhotos/dreyDk.jpeg'
-import AnnieBang from '../ArtistPhotos/Annie and the Bang Bang_SmouseintheHouse-6 - Annie Enneking.jpg'
-import CheapBouquet from '../ArtistPhotos/CheapBouquet.jpg'
-import HoneyPlease from '../ArtistPhotos/HoneyPlease.jpeg'
-import KingSizedCoffin from '../ArtistPhotos/KingSizedCoffin.jpg'
-import MommyLogBalls from '../ArtistPhotos/MommyLogBalls.jpeg'
-import PityParty from '../ArtistPhotos/pityParty.jpg'
-import TheWalkerBrothers from '../ArtistPhotos/TheWalkerBrothersBand.jpg'
-import TheWeepingCovenant from '../ArtistPhotos/theWeepingCovenant.jpg'
-import AtomicLights from '../ArtistPhotos/AtomicLights.jpeg'
-import SeyiOyinloye from '../ArtistPhotos/SeyiOyinloye.jpg'
-import RanchoUnicorno from '../ArtistPhotos/RanchoUnicorno.jpg'
 
 import RadioDr from '../VenuePhotos/RadioDr.jpeg'
 import BryantAve from '../VenuePhotos/BryantAve.jpeg'
@@ -31,59 +19,8 @@ import LyndaleAve from '../VenuePhotos/LyndaleAve.jpeg'
 import SummitAve from '../VenuePhotos/SummitAve.jpeg'
 
 export default function ArtistDashboard(){
-    
-  const itemData = [
-    {
-      img: SeyiOyinloye,
-      title: 'Seyi Oyinloye',
-    },
-    {
-      img: RanchoUnicorno,
-      title: 'Rancho Unicorno',
-    },
-    {
-      img: MommyLogBalls,
-      title: 'Mommy Log Balls',
-    },
-    {
-      img: PityParty,
-      title: 'Pity Party',
-    },
-    {
-      img: dreyDk,
-      title: 'drey dk',
-    },
-    {
-      img: AnnieBang,
-      title: 'Annie and the Bang Bang',
-    },
-    {
-      img: AtomicLights,
-      title: 'Atomic Lights',
-    },
-    {
-      img: CheapBouquet,
-      title: 'Cheap Bouquet',
-    },
-    {
-      img: HoneyPlease,
-      title: 'Honey Please',
-    },
-    {
-      img: KingSizedCoffin,
-      title: 'King Sized Coffin',
-    },
-    {
-      img: TheWalkerBrothers,
-      title: 'The Walker Brothers',
-    },
-    {
-      img: TheWeepingCovenant,
-      title: 'The Weeping Covenant',
-    },
-  ];
 
-  const itemData2 = [
+  const VenueData = [
     {
       img: RadioDr,
       title: '3 Radio Dr',
@@ -151,7 +88,7 @@ export default function ArtistDashboard(){
     <div className='image-list-div'>
     <React.Fragment>
       <ImageList sx={{ width: 500, height: 450 }}>
-      {itemData2.map((item) => (
+      {VenueData.map((item) => (
         <ImageListItem key={item.img}>
           <img
             srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
@@ -170,7 +107,7 @@ export default function ArtistDashboard(){
     
     <div>
       <ImageList sx={{ width: 500, height: 450 }}>
-      {itemData2.map((item) => (
+      {VenueData.map((item) => (
         <ImageListItem key={item.img}>
           <img
             srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}

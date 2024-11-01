@@ -94,6 +94,10 @@ export default function VenueUnranked(){
           variant='square'
         />
       </Stack>
+
+        <h4>Select a rating below, click to confirm your selection</h4>
+        <h4>Once your selection is confirmed, click save to save your rating and move to the next selection</h4>
+        <h4>Click Skip to go to the next selection without saving your rating</h4>
     
       <form style={{display: 'flex', justifyContent: 'center'}}>
       <StyledRating
@@ -105,7 +109,7 @@ export default function VenueUnranked(){
             size='large'
             isRequired={true}
           />
-          <button className='btn'>Submit</button>
+          <button className='btn'>Save Rating</button>
           <button className='btn'>Skip</button>
         </form>
 

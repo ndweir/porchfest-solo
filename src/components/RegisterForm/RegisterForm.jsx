@@ -71,32 +71,7 @@ function RegisterForm() {
           />
         </label>
       </div>
-      <h3>What times work for you? (Select at least 2 hours)</h3>
-      <div className='checkbox'>
-              <hr />
-                  <label>
-                    Time: <input type="checkbox" name="1pmCheckBox" defaultChecked={false} required />
-                    1 pm
-                  </label>
-                  <label>
-                    Time: <input type="checkbox" name="2pmCheckbox" defaultChecked={false} required />
-                    2 pm
-                  </label>
-                  <label>
-                    Time: <input type="checkbox" name="3pmCheckbox" defaultChecked={false} required />
-                    3 pm
-                  </label>
-                  <label>
-                    Time: <input type="checkbox" name="4pmCheckbox" defaultChecked={false} required />
-                    4 pm
-                  </label>
-                  <label>
-                    Time: <input type="checkbox" name="5pmCheckbox" defaultChecked={false} required />
-                    5 pm
-                  </label>
-              <hr />
-      </div>
-
+      
       <div className='radio-btn-registration'>
       <label>
         <input type="radio" name="accountTypeRadio" value="Artist" onChange={changeType} checked={type === "Artist"} required={type === "Artist" || type === "Admin" ? false : true}  />

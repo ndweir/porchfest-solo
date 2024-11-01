@@ -107,7 +107,6 @@ export default function VenueUnranked(){
             getLabelText={(value) => customIcons[value].label}
             highlightSelectedOnly
             size='large'
-            isRequired={true}
           />
           <button className='btn'>Save Rating</button>
           <button className='btn'>Skip</button>

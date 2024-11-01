@@ -113,6 +113,7 @@ export default function VenuePrevious(){
           />
           <button className='btn'>Save Rating</button>
           <button className='btn'>Skip</button>
+          <button className='btn'>Delete</button>
         </form>
       </div>
 

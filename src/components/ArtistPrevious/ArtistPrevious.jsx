@@ -1,6 +1,8 @@
 import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
 
 import RadioDr from '../VenuePhotos/RadioDr.jpeg'
 import BryantAve from '../VenuePhotos/BryantAve.jpeg'
@@ -22,6 +24,51 @@ import MusicNoteSharpIcon from '@mui/icons-material/MusicNoteSharp';
 import { sizeof } from 'stylis';
 
 export default function ArtistPrevious(){
+  const [rating, setRating] = useState();
+  const user = useSelector(store => store.user);
+  const dispatch = useDispatch();
+  const userId = user.id;
+  const testVenueId = 8;
+
+  const deleteRating = (event) => {
+    event.preventDefault();
+
+    let data = {
+      id: userId,
+      venue_id: testVenueId,
+      type: 'Venue',
+    }
+
+    dispatch({
+      type: "DELETE_RATING",
+      payload: data,
+    })
+
+  }
+
+  const saveRating = (event) => {
+    event.preventDefault();
+    console.log(userId)
+    console.log(rating)
+
+    let data = {
+      user_id: userId,
+      rating: rating,
+      venue_id: testVenueId,
+      type: 'Venue',
+    };
+
+    dispatch({
+      type: "ADD_RATING",
+      payload: data,
+    });
+
+    // iterate to next photo, change out artistID 
+
+
+}
+
+
     const StyledRating = styled(Rating)(({ theme }) => ({
         '& .MuiRating-iconEmpty .MuiSvgIcon-root': {
           color: theme.palette.action.disabled,
@@ -98,7 +145,7 @@ export default function ArtistPrevious(){
   <h4>Once your selection is confirmed, click save to save your rating and move to the next selection</h4>
   <h4>Click Skip to go to the next selection without saving your rating</h4>
 
-  <form style={{display: 'flex', justifyContent: 'center'}}>
+  <form style={{display: 'flex', justifyContent: 'center'}} onSubmit={saveRating}>
   <StyledRating
             name="highlight-selected-only"
             defaultValue={3}
@@ -106,10 +153,12 @@ export default function ArtistPrevious(){
             getLabelText={(value) => customIcons[value].label}
             highlightSelectedOnly
             size='large'
+            value={rating}
+            onChange={(event, newValue) => {setRating(newValue)}}
           />
-      <button className='btn'>Save Rating</button>
+      <button className='btn' type='submit'>Save Rating</button>
       <button className='btn'>Skip</button>
-      <button className='btn'>Delete</button>
+      <button className='btn' onClick={deleteRating}>Delete</button>
     </form>
   </div>
 

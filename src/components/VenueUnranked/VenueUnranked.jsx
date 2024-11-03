@@ -1,6 +1,7 @@
 import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import { useSelector, useDispatch } from 'react-redux';
 
 import dreyDk from '../ArtistPhotos/dreyDk.jpeg'
 import AnnieBang from '../ArtistPhotos/Annie and the Bang Bang_SmouseintheHouse-6 - Annie Enneking.jpg'
@@ -20,8 +21,55 @@ import { styled } from '@mui/material/styles';
 import Rating from '@mui/material/Rating';
 import MusicNoteSharpIcon from '@mui/icons-material/MusicNoteSharp';
 import { sizeof } from 'stylis';
+import { useState } from 'react';
+import { NewReleases } from '@mui/icons-material';
 
 export default function VenueUnranked(){
+  const [rating, setRating] = useState();
+  const user = useSelector(store => store.user);
+  const dispatch = useDispatch();
+  const userId = user.id;
+  const testArtistId = 2;
+
+  const deleteRating = (event) => {
+    event.preventDefault();
+
+    let data = {
+      id: userId,
+      artist_id: testArtistId,
+      type: 'Artist',
+    }
+
+    dispatch({
+      type: "DELETE_RATING",
+      payload: data,
+    })
+
+  }
+
+  const saveRating = (event) => {
+      event.preventDefault();
+      console.log(userId)
+      console.log(rating)
+
+      let data = {
+        user_id: userId,
+        rating: rating,
+        artist_id: testArtistId,
+        type: 'Artist',
+      };
+
+      dispatch({
+        type: "ADD_RATING",
+        payload: data,
+      });
+
+      // iterate to next photo, change out artistID 
+
+
+  }
+
+
 
     const StyledRating = styled(Rating)(({ theme }) => ({
         '& .MuiRating-iconEmpty .MuiSvgIcon-root': {
@@ -53,7 +101,9 @@ export default function VenueUnranked(){
       };
       
       function IconContainer(props) {
+
         const { value, ...other } = props;
+
         return <span {...other}>
         <div>{customIcons[value].icon}</div>
         <h6>{customIcons[value].label}</h6>
@@ -99,17 +149,20 @@ export default function VenueUnranked(){
         <h4>Once your selection is confirmed, click save to save your rating and move to the next selection</h4>
         <h4>Click Skip to go to the next selection without saving your rating</h4>
     
-      <form style={{display: 'flex', justifyContent: 'center'}}>
-      <StyledRating
-            name="highlight-selected-only"
-            defaultValue={3}
-            IconContainerComponent={IconContainer}
-            getLabelText={(value) => customIcons[value].label}
-            highlightSelectedOnly
-            size='large'
-          />
-          <button className='btn'>Save Rating</button>
+      <form style={{display: 'flex', justifyContent: 'center'}} onSubmit={saveRating}>
+        <StyledRating
+              name="highlight-selected-only"
+              defaultValue={3}
+              IconContainerComponent={IconContainer}
+              getLabelText={(value) => {customIcons[value].label}}
+              highlightSelectedOnly
+              size='large'
+              value={rating}
+              onChange={(event, newValue) => {setRating(newValue)}}
+            />
+          <button className='btn' type='submit'>Save Rating</button>
           <button className='btn'>Skip</button>
+          <button className='btn' onClick={deleteRating}>Delete</button>
         </form>
 
       </div>

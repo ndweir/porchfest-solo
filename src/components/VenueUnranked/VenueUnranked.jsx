@@ -55,6 +55,7 @@ export default function VenueUnranked(){
         user_id: userId,
         rating: rating,
         artist_id: testArtistId,
+        type: 'Artist',
       };
 
       dispatch({
@@ -147,22 +148,16 @@ export default function VenueUnranked(){
         <h4>Once your selection is confirmed, click save to save your rating and move to the next selection</h4>
         <h4>Click Skip to go to the next selection without saving your rating</h4>
     
-      <form style={{display: 'flex', justifyContent: 'center'}}
-      onSubmit={saveRating}
-      >
+      <form style={{display: 'flex', justifyContent: 'center'}} onSubmit={saveRating}>
         <StyledRating
               name="highlight-selected-only"
               defaultValue={3}
               IconContainerComponent={IconContainer}
-              getLabelText={(value) => {
-                customIcons[value].label
-              }}
+              getLabelText={(value) => {customIcons[value].label}}
               highlightSelectedOnly
               size='large'
               value={rating}
-              onChange={(event, newValue) => {
-                setRating(newValue);
-              }}
+              onChange={(event, newValue) => {setRating(newValue)}}
             />
           <button className='btn' type='submit'>Save Rating</button>
           <button className='btn'>Skip</button>

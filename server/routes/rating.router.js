@@ -28,27 +28,69 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.post('/', rejectUnauthenticated, (req, res) => {
   // POST route code here
   console.log('incoming rating data', req.body);
-  const {user_id, rating, artist_id} = req.body;
+  const {type, user_id, rating, artist_id} = req.body;
+  let params = [];
+  let sqlText;
+  switch (type){
+    case 'Artist': {
+      let sqlText = `
+      INSERT INTO "booking" (user_id, rating, artist_id)
+        VALUES ($1, $2, $3)
+        ON CONFLICT (user_id, artist_id)
+        DO UPDATE SET rating = EXCLUDED.rating
+        RETURNING "ratingId";
+    `
+      let params = [user_id, rating, artist_id];
+      pool.query(sqlText, params).then((result) => {
 
-    const sqlText = `
-    INSERT INTO "booking" (user_id, rating, artist_id)
-      VALUES ($1, $2, $3)
-      ON CONFLICT (user_id, artist_id)
-      DO UPDATE SET rating = EXCLUDED.rating
-      RETURNING "ratingId";
-  `;
+        const ratingId = result.rows;
+        console.log('rating ID', ratingId)
+    
+        res.sendStatus(201)
+      }).catch((err) => {
+        console.error("Error Inserting Rating", err);
+        res.sendStatus(500);
+      })
+      break;
+    } 
+    case 'Venue': {
+      let sqlText = `
+        INSERT INTO "booking" (user_id, rating, venue_id)
+          VALUES ($1, $2, $3)
+          ON CONFLICT (user_id, venue_id)
+          DO UPDATE SET rating = EXCLUDED.rating
+          RETURNING "ratingId";
+        `
+      let params = [user_id, rating, venue_id];
+      pool.query(sqlText, params).then((result) => {
 
-  const params = [user_id, rating, artist_id];
-  pool.query(sqlText, params).then((result) => {
+        const ratingId = result.rows;
+        console.log('rating ID', ratingId)
+    
+        res.sendStatus(201)
+      }).catch((err) => {
+        console.error("Error Inserting Rating", err);
+        res.sendStatus(500);
+      })
+      break;
+    }
 
-    const ratingId = result.rows;
-    console.log('rating ID', ratingId)
 
-    res.sendStatus(201)
-  }).catch((err) => {
-    console.error("Error Inserting Rating", err);
-    res.sendStatus(500);
-  })
+
+  }
+
+  
+
+  // if(type == 'Artist'){
+      
+  // } else if (type == 'Venue') {
+    
+  // }
+
+    
+
+  
+  
 
 });
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import { useSelector, useDispatch } from 'react-redux';
 
 import dreyDk from '../ArtistPhotos/dreyDk.jpeg'
 import AnnieBang from '../ArtistPhotos/Annie and the Bang Bang_SmouseintheHouse-6 - Annie Enneking.jpg'
@@ -25,12 +26,45 @@ import { NewReleases } from '@mui/icons-material';
 
 export default function VenueUnranked(){
   const [rating, setRating] = useState();
+  const user = useSelector(store => store.user);
+  const dispatch = useDispatch();
+  const userId = user.id;
+  const testArtistId = 2;
 
+  const deleteRating = (event) => {
+    event.preventDefault();
+
+    let data = {
+      id: userId,
+      artist_id: testArtistId,
+    }
+
+    dispatch({
+      type: "DELETE_RATING",
+      payload: data,
+    })
+
+  }
 
   const saveRating = (event) => {
       event.preventDefault();
-    
-      console.log('Rating text:', rating)
+      console.log(userId)
+      console.log(rating)
+
+      let data = {
+        user_id: userId,
+        rating: rating,
+        artist_id: testArtistId,
+      };
+
+      dispatch({
+        type: "ADD_RATING",
+        payload: data,
+      });
+
+      // iterate to next photo, change out artistID 
+
+
   }
 
 
@@ -132,6 +166,7 @@ export default function VenueUnranked(){
             />
           <button className='btn' type='submit'>Save Rating</button>
           <button className='btn'>Skip</button>
+          <button className='btn' onClick={deleteRating}>Delete</button>
         </form>
 
       </div>

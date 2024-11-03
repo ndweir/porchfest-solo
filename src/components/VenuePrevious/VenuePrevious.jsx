@@ -36,6 +36,7 @@ export default function VenuePrevious(){
     let data = {
       id: userId,
       artist_id: testArtistId,
+      type: 'Artist',
     }
 
     dispatch({
@@ -60,11 +61,7 @@ export default function VenuePrevious(){
       payload: data,
     });
 
-
   }
-
-
-
 
     const StyledRating = styled(Rating)(({ theme }) => ({
         '& .MuiRating-iconEmpty .MuiSvgIcon-root': {

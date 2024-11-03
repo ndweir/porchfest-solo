@@ -28,7 +28,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.post('/', rejectUnauthenticated, (req, res) => {
   // POST route code here
   console.log('incoming rating data', req.body);
-  const {type, user_id, rating, artist_id} = req.body;
+  const {type, user_id, rating, artist_id, venue_id} = req.body;
   let params = [];
   let sqlText;
   switch (type){
@@ -97,19 +97,37 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 // DELETE
 
 router.delete('/', rejectUnauthenticated, (req, res) => {
-  const {id, artist_id} = req.body;
+  const {id, artist_id, venue_id, type} = req.body;
 
-
-  const sqlText = `
-  DELETE FROM "booking" 
-  WHERE user_id = $1 AND artist_id = $2
+  switch (type){
+    case 'Artist':{
+      const sqlText = `
+      DELETE FROM "booking" 
+      WHERE user_id = $1 AND artist_id = $2
   `;
 
-  const params = [id, artist_id]
+    const params = [id, artist_id]
     pool.query(sqlText, params).then((result) => res.sendStatus(204)).catch((error) => {
       console.error('Error Deleting Rating', error)
       res.sendStatus(500);
     });
+    };
+    case 'Venue': {
+
+      const sqlText = `
+    DELETE FROM "booking" 
+    WHERE user_id = $1 AND venue_id = $2
+    `;
+
+    const params = [id, venue_id]
+    pool.query(sqlText, params).then((result) => res.sendStatus(204)).catch((error) => {
+      console.error('Error Deleting Rating', error)
+      res.sendStatus(500);
+    });
+    };
+  }
+
+  
 })
 
 

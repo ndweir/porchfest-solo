@@ -37,6 +37,7 @@ export default function VenueUnranked(){
     let data = {
       id: userId,
       artist_id: testArtistId,
+      type: 'Artist',
     }
 
     dispatch({

@@ -2,6 +2,7 @@ import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
 
 import RadioDr from '../VenuePhotos/RadioDr.jpeg'
 import BryantAve from '../VenuePhotos/BryantAve.jpeg'
@@ -35,6 +36,7 @@ export default function ArtistPrevious(){
     let data = {
       id: userId,
       venue_id: testVenueId,
+      type: 'Venue',
     }
 
     dispatch({
@@ -151,7 +153,8 @@ export default function ArtistPrevious(){
             getLabelText={(value) => customIcons[value].label}
             highlightSelectedOnly
             size='large'
-            value={}
+            value={rating}
+            onChange={(event, newValue) => {setRating(newValue)}}
           />
       <button className='btn' type='submit'>Save Rating</button>
       <button className='btn'>Skip</button>

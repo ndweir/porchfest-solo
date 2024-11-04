@@ -1,7 +1,10 @@
-import React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Avatar, Stack } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import PropTypes from 'prop-types';
+import Rating from '@mui/material/Rating';
+import MusicNoteSharpIcon from '@mui/icons-material/MusicNoteSharp';
 
 import dreyDk from '../ArtistPhotos/dreyDk.jpeg'
 import AnnieBang from '../ArtistPhotos/Annie and the Bang Bang_SmouseintheHouse-6 - Annie Enneking.jpg'
@@ -16,16 +19,10 @@ import AtomicLights from '../ArtistPhotos/AtomicLights.jpeg'
 import SeyiOyinloye from '../ArtistPhotos/SeyiOyinloye.jpg'
 import RanchoUnicorno from '../ArtistPhotos/RanchoUnicorno.jpg'
 
-import PropTypes from 'prop-types';
-import { styled } from '@mui/material/styles';
-import Rating from '@mui/material/Rating';
-import MusicNoteSharpIcon from '@mui/icons-material/MusicNoteSharp';
-import { sizeof } from 'stylis';
-import { useState } from 'react';
-import { NewReleases } from '@mui/icons-material';
 
 export default function VenueUnranked(){
   const previousArr = useSelector(store => store.previouslyRated);
+  const lastAction = useSelector(store => store.lastAction);
   const [rating, setRating] = useState();
   const user = useSelector(store => store.user);
   const dispatch = useDispatch();
@@ -95,93 +92,76 @@ export default function VenueUnranked(){
     },
   ])
 
-  const ArtistData = [
-    {
-      img: SeyiOyinloye,
-      title: 'Seyi Oyinloye',
-      id: 15,
-    },
-    {
-      img: RanchoUnicorno,
-      title: 'Rancho Unicorno',
-      id: 2,
-    },
-    {
-      img: MommyLogBalls,
-      title: 'Mommy Log Balls',
-      id: 16,
-    },
-    {
-      img: PityParty,
-      title: 'Pity Party',
-      id: 14,
-    },
-    {
-      img: dreyDk,
-      title: 'drey dk',
-      id: 11,
-    },
-    {
-      img: AnnieBang,
-      title: 'Annie and the Bang Bang',
-      id: 1,
-    },
-    {
-      img: AtomicLights,
-      title: 'Atomic Lights',
-      id: 3,
-    },
-    {
-      img: CheapBouquet,
-      title: 'Cheap Bouquet',
-      id: 5,
-    },
-    {
-      img: HoneyPlease,
-      title: 'Honey Please',
-      id: 17,
-    },
-    {
-      img: KingSizedCoffin,
-      title: 'King Sized Coffin',
-      id: 9,
-    },
-    {
-      img: TheWalkerBrothers,
-      title: 'The Walker Brothers',
-      id: 12,
-    },
-    {
-      img: TheWeepingCovenant,
-      title: 'The Weeping Covenant',
-      id: 13,
-    },
-  ]
+  // const ArtistData = [
+  //   {
+  //     img: SeyiOyinloye,
+  //     title: 'Seyi Oyinloye',
+  //     id: 15,
+  //   },
+  //   {
+  //     img: RanchoUnicorno,
+  //     title: 'Rancho Unicorno',
+  //     id: 2,
+  //   },
+  //   {
+  //     img: MommyLogBalls,
+  //     title: 'Mommy Log Balls',
+  //     id: 16,
+  //   },
+  //   {
+  //     img: PityParty,
+  //     title: 'Pity Party',
+  //     id: 14,
+  //   },
+  //   {
+  //     img: dreyDk,
+  //     title: 'drey dk',
+  //     id: 11,
+  //   },
+  //   {
+  //     img: AnnieBang,
+  //     title: 'Annie and the Bang Bang',
+  //     id: 1,
+  //   },
+  //   {
+  //     img: AtomicLights,
+  //     title: 'Atomic Lights',
+  //     id: 3,
+  //   },
+  //   {
+  //     img: CheapBouquet,
+  //     title: 'Cheap Bouquet',
+  //     id: 5,
+  //   },
+  //   {
+  //     img: HoneyPlease,
+  //     title: 'Honey Please',
+  //     id: 17,
+  //   },
+  //   {
+  //     img: KingSizedCoffin,
+  //     title: 'King Sized Coffin',
+  //     id: 9,
+  //   },
+  //   {
+  //     img: TheWalkerBrothers,
+  //     title: 'The Walker Brothers',
+  //     id: 12,
+  //   },
+  //   {
+  //     img: TheWeepingCovenant,
+  //     title: 'The Weeping Covenant',
+  //     id: 13,
+  //   },
+  // ]
 
-        const deleteRating = (event) => {
-          event.preventDefault();
-      
-          let data = {
-            id: userId,
-            artist_id: PrevPicObj.id,
-            type: 'Artist',
-          }
-      
-          dispatch({
-            type: "DELETE_RATING",
-            payload: data,
-          })
-          
-            previous.push(artistData[0])
-            setArtistData(artistData.slice(1))
-        }
-      
         const saveRating = (event) => {
             event.preventDefault();
-            console.log(userId)
-            console.log(rating)
+            // console.log(userId)
+            // console.log(rating)
 
             if(artistData.length === 0) return;
+
             const PrevPicObj = artistData[0]
       
             let data = {
@@ -196,22 +176,44 @@ export default function VenueUnranked(){
               payload: data,
             });
       
-            // iterate to next photo, change out artistID
-            setPrevious([...previous, artistData[0]])
+            // shift to next photo, change out artistID
+            const removedArtist = artistData.shift()
+            removedArtist.rating = rating;
+
+            setPrevious([...previous, removedArtist])
+            setArtistData([...artistData]);
             
-            const addRatedArtist = () => {
+            console.log('ARTIST DATA AFTER SHIFT', artistData)
+           
               dispatch({
                 type: "ADD_RATED",
-                payload: previous[previous.length - 1],
-              })
-
-              setArtistData(artistData.slice(1))
-              console.log('previously rated', previousArr)
-            }
-
-            previous.length > 0 ? addRatedArtist() : setArtistData(artistData.slice(1));
+                payload: removedArtist,
+              });
+              console.log('previous', previous)
+        };
+            
+        const skipRating = (event) => {
+          event.preventDefault();
+    
+          if(artistData.length === 0) return;
+          
+          const skippedArtist = artistData.shift();
+          setPrevious([...previous, skippedArtist])
+          artistData.push(skippedArtist);
+    
+          console.log('AFTER Skip', artistData)
         }
       
+        const addArtistBack = (artist) => {
+          setArtistData([...artistData, artist]);
+        };
+
+        useEffect(() => {
+          if(lastAction && lastAction.type === "ADD_ARTIST_BACK"){
+            addArtistBack(lastAction.payload)
+          }  
+        }, [lastAction]);
+
         if(artistData.length === 0){
           return <p>No More Artists to Rate!</p>
         }
@@ -317,8 +319,7 @@ export default function VenueUnranked(){
                     onChange={(event, newValue) => {setRating(newValue)}}
                   />
                 <button className='btn' type='submit'>Save Rating</button>
-                <button className='btn'>Skip</button>
-                <button className='btn' onClick={deleteRating}>Delete</button>
+                <button className='btn' onClick={skipRating}>Skip</button>
               </form>
       
             </div>

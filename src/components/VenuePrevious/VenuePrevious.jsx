@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import { useSelector, useDispatch } from 'react-redux';
+import { styled } from '@mui/material/styles';
+import PropTypes from 'prop-types';
+import Rating from '@mui/material/Rating';
+import MusicNoteSharpIcon from '@mui/icons-material/MusicNoteSharp';
+import { sizeof } from 'stylis';
 
 import dreyDk from '../ArtistPhotos/dreyDk.jpeg'
 import AnnieBang from '../ArtistPhotos/Annie and the Bang Bang_SmouseintheHouse-6 - Annie Enneking.jpg'
@@ -15,64 +20,92 @@ import TheWeepingCovenant from '../ArtistPhotos/theWeepingCovenant.jpg'
 import AtomicLights from '../ArtistPhotos/AtomicLights.jpeg'
 import SeyiOyinloye from '../ArtistPhotos/SeyiOyinloye.jpg'
 import RanchoUnicorno from '../ArtistPhotos/RanchoUnicorno.jpg'
+import previouslyRated from '../../redux/reducers/previouslyRated.reducer';
 
 
-import PropTypes from 'prop-types';
-import { styled } from '@mui/material/styles';
-import Rating from '@mui/material/Rating';
-import MusicNoteSharpIcon from '@mui/icons-material/MusicNoteSharp';
-import { sizeof } from 'stylis';
+
 
 export default function VenuePrevious(){
     const previousArr = useSelector(store => store.previouslyRated);
     const [rating, setRating] = useState();
-    const [previousRanked, setPreviousRanked] = useState([])
     const user = useSelector(store => store.user);
     const dispatch = useDispatch();
     const userId = user.id;
-    console.log('previous ranked', previousArr)
 
-   // setPrevious([...previous, artistData[0]])
+    useEffect(() => {
+      console.log('previousArr updated', previousArr);
+    }, [previousArr]);
 
-   useEffect(() => {
-    if(previousArr.length > 0){
-      setPreviousRanked([...previousArr])
-    } 
-   }, [previousArr]);
+    const saveRating = (event) => {
+      event.preventDefault();
+  
+      if(previousArr.previouslyRated.length === 0) return;
 
-  console.log('prev ranked after being set', previousRanked)
+      const firstRatedObj = previousArr.previouslyRated[0];;
+
+      if(!firstRatedObj){
+        console.error('Rank to Display Previous Ranked!')
+        return;
+      }
+
+      let data = {
+        user_id: userId,
+        rating: rating,
+        artist_id: firstRatedObj.id,
+        type: 'Artist',
+      };
+  
+      dispatch({
+        type:"ADD_RATING",
+        payload: data,
+      });
+      console.log('BEFORE', previousArr)
+      const removedArtist = previousArr.previouslyRated.shift()
+      console.log('AFTER SHIFT', previousArr)
+      previousArr.previouslyRated.push(removedArtist)
+      console.log('AFTER PUSH', previousArr)
+    }
+
+    const skipRating = (event) => {
+      event.preventDefault();
+
+      if(previousArr.previouslyRated.length === 0) return;
+
+      const skippedArtist = previousArr.previouslyRated.shift();
+      previousArr.previouslyRated.push(skippedArtist);
+
+      console.log('AFTER Skip', previousArr)
+    }
+
+
   const deleteRating = (event) => {
     event.preventDefault();
 
+    if(previousArr.previouslyRated.length === 0) return;
+
+    const firstRatedObj = previousArr.previouslyRated[0];;
+
     let data = {
       id: userId,
-      artist_id: testArtistId,
+      artist_id: firstRatedObj.id,
       type: 'Artist',
     }
 
     dispatch({
       type: "DELETE_RATING",
       payload: data,
-    })
-
-  }
-
-  const saveRating = (event) => {
-    event.preventDefault();
-
-    let data = {
-      user_id: userId,
-      rating: rating,
-      artist_id: testArtistId,
-      type: 'Artist',
-    };
-
-    dispatch({
-      type:"ADD_RATING",
-      payload: data,
     });
 
+
+    const removedArtist = previousArr.previouslyRated.shift();
+    dispatch({
+      type: "ADD_ARTIST_BACK",
+      payload: removedArtist,
+    })
+
+    console.log("AFTER DELETE", previousArr)
   }
+
 
     const StyledRating = styled(Rating)(({ theme }) => ({
         '& .MuiRating-iconEmpty .MuiSvgIcon-root': {
@@ -115,34 +148,30 @@ export default function VenuePrevious(){
         value: PropTypes.number.isRequired,
       };
 
+      
+
+      const currentObj = previousArr.previouslyRated[0];
+     // console.log('PREVIOUS ADD AT 0', previousArr.previouslyRated[0])
+      if (previousArr.length === 0) {
+        return (<p>No artists to display, Rank some!</p>);
+      } 
+      
+      if(!currentObj){
+        return (<p>No artist found</p>);
+      }
 
     return (
         <div className="container" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
             <h1>Previously Ranked Artists</h1>
         <div className='rankTitles'>
-          <h2>Previous</h2>
-          <h2>Current</h2>
-          <h2>Next</h2>
+          <h2>Current Previously Rated</h2>
         </div>
         
          <Stack direction="row" spacing={2}>
         <Avatar
-          alt="Mommy Log Balls"
-          src={MommyLogBalls}
-          sx={{ width: 350, height: 350 }}
-          variant='square'
-        />
-    
-        <Avatar
-          alt="Pity Party"
-          src={PityParty}
+          alt={currentObj.title}
+          src={currentObj.img}
           sx={{ width: 500, height: 500 }}
-          variant='square'
-        />
-        <Avatar
-          alt="Cheap Bouquet"
-          src={CheapBouquet}
-          sx={{ width: 350, height: 350 }}
           variant='square'
         />
       </Stack>
@@ -163,7 +192,7 @@ export default function VenuePrevious(){
             onChange={(event, newValue) => {setRating(newValue)}}
           />
           <button className='btn' type='submit'>Save Rating</button>
-          <button className='btn'>Skip</button>
+          <button className='btn' onClick={skipRating}>Skip</button>
           <button className='btn' onClick={deleteRating}>Delete</button>
         </form>
       </div>

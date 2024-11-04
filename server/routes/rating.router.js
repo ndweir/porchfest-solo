@@ -74,24 +74,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
       })
       break;
     }
-
-
-
   }
-
-  
-
-  // if(type == 'Artist'){
-      
-  // } else if (type == 'Venue') {
-    
-  // }
-
-    
-
-  
-  
-
 });
 
 // DELETE
@@ -105,7 +88,6 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
       DELETE FROM "booking" 
       WHERE user_id = $1 AND artist_id = $2
   `;
-
     const params = [id, artist_id]
     pool.query(sqlText, params).then((result) => res.sendStatus(204)).catch((error) => {
       console.error('Error Deleting Rating', error)
@@ -113,12 +95,10 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
     });
     };
     case 'Venue': {
-
       const sqlText = `
     DELETE FROM "booking" 
     WHERE user_id = $1 AND venue_id = $2
     `;
-
     const params = [id, venue_id]
     pool.query(sqlText, params).then((result) => res.sendStatus(204)).catch((error) => {
       console.error('Error Deleting Rating', error)
@@ -126,10 +106,5 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
     });
     };
   }
-
-  
 })
-
-
-
 module.exports = router;

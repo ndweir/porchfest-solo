@@ -23,50 +23,62 @@ export default function VenueDashboard(){
     {
       img: SeyiOyinloye,
       title: 'Seyi Oyinloye',
+      id: 15,
     },
     {
       img: RanchoUnicorno,
       title: 'Rancho Unicorno',
+      id: 2,
     },
     {
       img: MommyLogBalls,
       title: 'Mommy Log Balls',
+      id: 16,
     },
     {
       img: PityParty,
       title: 'Pity Party',
+      id: 14,
     },
     {
       img: dreyDk,
       title: 'drey dk',
+      id: 11,
     },
     {
       img: AnnieBang,
       title: 'Annie and the Bang Bang',
+      id: 1,
     },
     {
       img: AtomicLights,
       title: 'Atomic Lights',
+      id: 3,
     },
     {
       img: CheapBouquet,
       title: 'Cheap Bouquet',
+      id: 5,
     },
     {
       img: HoneyPlease,
       title: 'Honey Please',
+      id: 17,
     },
     {
       img: KingSizedCoffin,
       title: 'King Sized Coffin',
+      id: 9,
     },
     {
       img: TheWalkerBrothers,
       title: 'The Walker Brothers',
+      id: 12,
     },
     {
       img: TheWeepingCovenant,
       title: 'The Weeping Covenant',
+      id: 13,
     },
   ];
 

@@ -24,50 +24,62 @@ export default function ArtistDashboard(){
     {
       img: RadioDr,
       title: '3 Radio Dr',
+      id: 18,
     },
     {
       img: SummitAve,
       title: '1006 Summit Ave',
+      id: 26,
     },
     {
       img: BryantAve,
       title: '824 Bryant Ave',
+      id: 19,
     },
     {
       img: DaleSt,
       title: '1738 Dale St',
+      id: 20,
     },
     {
       img: DupontAve,
       title: '540 Dupont Ave',
+      id: 7,
     },
     {
       img: GrandAve,
       title: '1979 Grand Ave',
+      id: 6,
     },
     {
       img: HennepinAve,
       title: '901 Hennepin Ave',
+      id: 21,
     },
     {
       img: IrvingAve,
       title: '2292 Irving Ave',
+      id: 22,
     },
     {
       img: JeffersonAve,
       title: '2229 Jefferson Ave',
+      id: 8,
     },
     {
       img: LakeSt,
       title: '1999 Lake St',
+      id: 23,
     },
     {
       img: LincolnAve,
       title: '5390 Lincoln Ave',
+      id: 24,
     },
     {
       img: LyndaleAve,
       title: '5136 Lyndale Ave',
+      id: 25,
     },
   ];
 

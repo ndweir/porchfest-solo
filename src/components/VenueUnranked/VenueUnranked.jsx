@@ -25,11 +25,11 @@ import { useState } from 'react';
 import { NewReleases } from '@mui/icons-material';
 
 export default function VenueUnranked(){
+  const previousArr = useSelector(store => store.previouslyRated);
   const [rating, setRating] = useState();
   const user = useSelector(store => store.user);
   const dispatch = useDispatch();
   const userId = user.id;
-  const testArtistId = 2;
   const [previous, setPrevious] = useState([]);
 
   const [artistData, setArtistData] = useState([
@@ -198,8 +198,18 @@ export default function VenueUnranked(){
       
             // iterate to next photo, change out artistID
             setPrevious([...previous, artistData[0]])
-            setArtistData(artistData.slice(1))
-            console.log('prev', previous)
+            
+            const addRatedArtist = () => {
+              dispatch({
+                type: "ADD_RATED",
+                payload: previous[previous.length - 1],
+              })
+
+              setArtistData(artistData.slice(1))
+              console.log('previously rated', previousArr)
+            }
+
+            previous.length > 0 ? addRatedArtist() : setArtistData(artistData.slice(1));
         }
       
         if(artistData.length === 0){

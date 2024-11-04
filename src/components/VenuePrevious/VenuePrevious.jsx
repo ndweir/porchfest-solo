@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import { useSelector, useDispatch } from 'react-redux';
@@ -24,12 +24,23 @@ import MusicNoteSharpIcon from '@mui/icons-material/MusicNoteSharp';
 import { sizeof } from 'stylis';
 
 export default function VenuePrevious(){
+    const previousArr = useSelector(store => store.previouslyRated);
     const [rating, setRating] = useState();
+    const [previousRanked, setPreviousRanked] = useState([])
     const user = useSelector(store => store.user);
     const dispatch = useDispatch();
     const userId = user.id;
-    const testArtistId = 3;
+    console.log('previous ranked', previousArr)
 
+   // setPrevious([...previous, artistData[0]])
+
+   useEffect(() => {
+    if(previousArr.length > 0){
+      setPreviousRanked([...previousArr])
+    } 
+   }, [previousArr]);
+
+  console.log('prev ranked after being set', previousRanked)
   const deleteRating = (event) => {
     event.preventDefault();
 

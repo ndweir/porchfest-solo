@@ -26,7 +26,7 @@ import previouslyRated from '../../redux/reducers/previouslyRated.reducer';
 
 
 export default function VenuePrevious(){
-    const previousArr = useSelector(store => store.previouslyRated);
+    const previousArr = useSelector(store => store.previouslyRated.previouslyRated);
     const [rating, setRating] = useState();
     const user = useSelector(store => store.user);
     const dispatch = useDispatch();
@@ -39,9 +39,9 @@ export default function VenuePrevious(){
     const saveRating = (event) => {
       event.preventDefault();
   
-      if(previousArr.previouslyRated.length === 0) return;
+      if(previousArr.length === 0) return;
 
-      const firstRatedObj = previousArr.previouslyRated[0];;
+      const firstRatedObj = previousArr[0];;
 
       if(!firstRatedObj){
         console.error('Rank to Display Previous Ranked!')
@@ -60,19 +60,19 @@ export default function VenuePrevious(){
         payload: data,
       });
       console.log('BEFORE', previousArr)
-      const removedArtist = previousArr.previouslyRated.shift()
+      const removedArtist = previousArr.shift()
       console.log('AFTER SHIFT', previousArr)
-      previousArr.previouslyRated.push(removedArtist)
+      previousArr.push(removedArtist)
       console.log('AFTER PUSH', previousArr)
     }
 
     const skipRating = (event) => {
       event.preventDefault();
 
-      if(previousArr.previouslyRated.length === 0) return;
+      if(previousArr.length === 0) return;
 
-      const skippedArtist = previousArr.previouslyRated.shift();
-      previousArr.previouslyRated.push(skippedArtist);
+      const skippedArtist = previousArr.shift();
+      previousArr.push(skippedArtist);
 
       console.log('AFTER Skip', previousArr)
     }
@@ -81,9 +81,9 @@ export default function VenuePrevious(){
   const deleteRating = (event) => {
     event.preventDefault();
 
-    if(previousArr.previouslyRated.length === 0) return;
+    if(previousArr.length === 0) return;
 
-    const firstRatedObj = previousArr.previouslyRated[0];;
+    const firstRatedObj = previousArr[0];;
 
     let data = {
       id: userId,
@@ -97,7 +97,7 @@ export default function VenuePrevious(){
     });
 
 
-    const removedArtist = previousArr.previouslyRated.shift();
+    const removedArtist = previousArr.shift();
     dispatch({
       type: "ADD_ARTIST_BACK",
       payload: removedArtist,
@@ -150,7 +150,7 @@ export default function VenuePrevious(){
 
       
 
-      const currentObj = previousArr.previouslyRated[0];
+      const currentObj = previousArr[0];
      // console.log('PREVIOUS ADD AT 0', previousArr.previouslyRated[0])
       if (previousArr.length === 0) {
         return (<p>No artists to display, Rank some!</p>);

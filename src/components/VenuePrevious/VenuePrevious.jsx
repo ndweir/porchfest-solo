@@ -177,16 +177,16 @@ export default function VenuePrevious(){
         <Avatar
           alt={currentObj.title}
           src={currentObj.img}
-          sx={{ width: 500, height: 500 }}
+          sx={{ width: 850, height: 600}}
           variant='square'
         />
       </Stack >
-
-        <h4>Select a rating below, click to confirm your selection</h4>
+        <h1 className='rankTitles'>{currentObj.title}</h1>
+        {/* <h4>Select a rating below, click to confirm your selection</h4>
         <h4>Once your selection is confirmed, click save to save your rating and move to the next selection</h4>
         <h4 style={{ marginBottom: '40px' }}>Click Skip to go to the next selection without saving your rating</h4>
 
-       
+        */}
 
       <form style={{display: 'flex', justifyContent: 'center'}} onSubmit={saveRating}>
       <StyledRating

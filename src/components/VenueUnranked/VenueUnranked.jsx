@@ -246,18 +246,18 @@ export default function VenueUnranked(){
                   <h1>Rate Artists</h1>
               <div className='rankTitles'>
                 {previousArr.length > 0 && (
-                  <h2>Previous</h2>
+                  <h1>Previous</h1>
                 )}
-                <h2>Current</h2>
-                <h2>Next</h2>
+                <h1>Current</h1>
+                <h1>Next</h1>
               </div>
               
-              <Stack direction="row" spacing={2} justifyContent={"space-around"}>
+              <Stack direction="row" spacing={2} justifyContent={"space-around"} >
                 {previousArr.length > 0 && (
                   <Avatar
                   alt={previousArr[previousArr.length - 1].title}
                   src={previousArr[previousArr.length - 1].img}
-                  sx={{ width: 350, height: 350 }}
+                  sx={{ width: 450, height: 450 }}
                   variant='square'
                   />
                 )}
@@ -265,26 +265,26 @@ export default function VenueUnranked(){
                     <Avatar
                     alt={artistData[0].title}
                     src={artistData[0].img}
-                    sx={{ width: 500, height: 500 }}
+                    sx={{ width: 750, height: 650 }}
                     variant='square'
                     />
                     
                     <Avatar
                     alt={artistData[1].title}
                     src={artistData[1].img}
-                    sx={{ width: 350, height: 350 }}
+                    sx={{ width: 450, height: 450 }}
                     variant='square'
                     />
 
             </Stack>
             {previousArr.length > 0 && (
-              <h2 style={{display: 'flex', justifyContent: 'center'}}>{artistData[0].title}</h2>
+              <h1 style={{display: 'flex', justifyContent: 'center', marginBottom: '30px'}}>{artistData[0].title}</h1>
             )}
             
 
-              <h4>Select a rating below, click to confirm your selection</h4>
+              {/* <h4>Select a rating below, click to confirm your selection</h4>
               <h4>Once your selection is confirmed, click save to save your rating and move to the next selection</h4>
-              <h4>Click Skip to go to the next selection without saving your rating</h4>
+              <h4>Click Skip to go to the next selection without saving your rating</h4> */}
           
             <form style={{display: 'flex', justifyContent: 'center'}} onSubmit={saveRating}>
               <StyledRating

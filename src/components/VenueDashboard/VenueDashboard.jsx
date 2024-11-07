@@ -119,7 +119,7 @@ export default function VenueDashboard(){
       </div>
       
     <div className='image-list-div'>
-    <ImageList sx={{ width: 500, height: 450 }}>
+    <ImageList sx={{ width: 800, height: 650 }}>
       {sortedArtists.map((item) => (
         <ImageListItem key={item.img}>
           <img
@@ -140,7 +140,7 @@ export default function VenueDashboard(){
     
     </div>
     <React.Fragment>
-      <ImageList sx={{ width: 500, height: 450 }}>
+      <ImageList sx={{ width: 800, height: 650 }}>
       
       {previousArr.length === 0 ? (
         <p>There are no previously rated artists, Rate some!</p>

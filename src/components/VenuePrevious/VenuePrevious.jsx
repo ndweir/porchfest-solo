@@ -65,11 +65,14 @@ export default function VenuePrevious(){
         type:"ADD_RATING",
         payload: data,
       });
-      console.log('BEFORE', previousArr)
+      
+      console.log('BEFORE SAVE: ', previousArr)
       const removedArtist = previousArr.shift()
-      console.log('AFTER SHIFT', previousArr)
-      previousArr.push(removedArtist)
-      console.log('AFTER PUSH', previousArr)
+      console.log('AFTER SHIFT: ', previousArr)
+      const takeOutDupes = previousArr.filter(artist => artist.id !== removedArtist.id)
+      console.log('TAKE OUT DUPES AFTER FILTER', takeOutDupes)
+      setPreviousArr([...takeOutDupes, removedArtist]);
+      console.log('AFTER SAVE: ', previousArr)
 
     }
 
@@ -79,7 +82,8 @@ export default function VenuePrevious(){
       if(previousArr.length === 0) return;
 
       const skippedArtist = previousArr.shift();
-      setPreviousArr([...previousArr, skippedArtist]);
+      const takeOutDupes = previousArr.filter(artist => artist.id !== skippedArtist.id)
+      setPreviousArr([...takeOutDupes, skippedArtist]);
       console.log('AFTER Skip', previousArr)
     }
 
@@ -169,18 +173,20 @@ export default function VenuePrevious(){
           <h2>Current Previously Rated</h2>
         </div>
         
-         <Stack direction="row" spacing={2}>
+         <Stack direction="row" spacing={2} justifyContent={"center"} style={{ marginBottom: '20px' }}>
         <Avatar
           alt={currentObj.title}
           src={currentObj.img}
           sx={{ width: 500, height: 500 }}
           variant='square'
         />
-      </Stack>
+      </Stack >
 
         <h4>Select a rating below, click to confirm your selection</h4>
         <h4>Once your selection is confirmed, click save to save your rating and move to the next selection</h4>
-        <h4>Click Skip to go to the next selection without saving your rating</h4>
+        <h4 style={{ marginBottom: '40px' }}>Click Skip to go to the next selection without saving your rating</h4>
+
+       
 
       <form style={{display: 'flex', justifyContent: 'center'}} onSubmit={saveRating}>
       <StyledRating

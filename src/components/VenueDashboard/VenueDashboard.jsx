@@ -50,7 +50,7 @@ export default function VenueDashboard(){
     },
     {
       img: dreyDk,
-      title: 'drey dk',
+      title: 'Drey Dk',
       id: 11,
     },
     {
@@ -90,6 +90,19 @@ export default function VenueDashboard(){
     },
   ];
 
+  const sortedArtists = ArtistData.sort(function(a, b){
+    if(a.title < b.title){
+      return -1;
+    }
+
+    if(a.title > b.title){
+      return 1;
+    }
+    return 0;
+  })
+
+  console.log("sorted artists a-z!!", sortedArtists)
+
   const user = useSelector((store) => store.user);
   return (
     <>
@@ -108,7 +121,7 @@ export default function VenueDashboard(){
       
     <div className='image-list-div'>
     <ImageList sx={{ width: 500, height: 450 }}>
-      {ArtistData.map((item) => (
+      {sortedArtists.map((item) => (
         <ImageListItem key={item.img}>
           <img
             srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}

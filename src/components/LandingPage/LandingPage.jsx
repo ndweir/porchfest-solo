@@ -35,13 +35,13 @@ function LandingPage() {
 
       <div className="grid">
         <div className="grid-col grid-col_8">
-          <p>
+          <p style={{ marginBottom: '20px' }}>
             Porchfest will feature multiple, spread-out, overlapping concerts
              during a single afternoon that attendees can enjoy while 
              wandering the neighborhood.
           </p>
 
-          <p>
+          <p style={{ marginBottom: '20px' }}>
           It provides an opportunity to explore the Wedge neighborhood
            of Uptown in an intimate and novel way. Attendees can 
            discover new musicians, support local businesses, 

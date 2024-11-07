@@ -252,7 +252,7 @@ export default function VenueUnranked(){
                 <h2>Next</h2>
               </div>
               
-              <Stack direction="row" spacing={2}>
+              <Stack direction="row" spacing={2} justifyContent={"space-around"}>
                 {previousArr.length > 0 && (
                   <Avatar
                   alt={previousArr[previousArr.length - 1].title}

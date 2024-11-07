@@ -93,8 +93,8 @@ export default function ArtistDashboard(){
       </div>
       
       <div className='div-imageList-title'>
-        <h3>Unranked Venues </h3>
-        <h3>Previously Ranked Venues</h3>
+        <h3>Unrated Venues </h3>
+        <h3>Previously Rated Venues</h3>
       </div>
       
     <div className='image-list-div'>

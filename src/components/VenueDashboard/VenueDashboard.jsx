@@ -16,9 +16,17 @@ import TheWeepingCovenant from '../ArtistPhotos/theWeepingCovenant.jpg'
 import AtomicLights from '../ArtistPhotos/AtomicLights.jpeg'
 import SeyiOyinloye from '../ArtistPhotos/SeyiOyinloye.jpg'
 import RanchoUnicorno from '../ArtistPhotos/RanchoUnicorno.jpg'
+import { useState } from 'react';
 
 export default function VenueDashboard(){
-    
+  const [previousArr, setPreviousArr] = useState(() => {
+    const savedData = localStorage.getItem('previousArr');
+    return savedData ? JSON.parse(savedData) : [];
+  });
+
+  console.log(previousArr)
+
+
   const ArtistData = [
     {
       img: SeyiOyinloye,
@@ -42,7 +50,7 @@ export default function VenueDashboard(){
     },
     {
       img: dreyDk,
-      title: 'drey dk',
+      title: 'Drey Dk',
       id: 11,
     },
     {
@@ -82,6 +90,19 @@ export default function VenueDashboard(){
     },
   ];
 
+  const sortedArtists = ArtistData.sort(function(a, b){
+    if(a.title < b.title){
+      return -1;
+    }
+
+    if(a.title > b.title){
+      return 1;
+    }
+    return 0;
+  })
+
+  console.log("sorted artists a-z!!", sortedArtists)
+
   const user = useSelector((store) => store.user);
   return (
     <>
@@ -92,33 +113,15 @@ export default function VenueDashboard(){
       </div>
       
       <div className='div-imageList-title'>
-        <h3>Unranked Artists</h3>
-        <h3>Previously Ranked Artists </h3>
+        <h3>All Artists</h3>
+        {previousArr.length === 0 ? <p></p> : (
+           <h3>Recently Rated Artists </h3>
+        ) }
       </div>
       
     <div className='image-list-div'>
-    <React.Fragment>
-      <ImageList sx={{ width: 500, height: 450 }}>
-      {ArtistData.map((item) => (
-        <ImageListItem key={item.img}>
-          <img
-            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-            src={`${item.img}?w=248&fit=crop&auto=format`}
-            alt={item.title}
-            loading="lazy"
-          />
-          <ImageListItemBar
-            title={item.title}
-            position="below"
-          />
-        </ImageListItem>
-      ))}
-      </ImageList>
-      </React.Fragment>
-    
-    <div>
-      <ImageList sx={{ width: 500, height: 450 }}>
-      {ArtistData.map((item) => (
+    <ImageList sx={{ width: 500, height: 450 }}>
+      {sortedArtists.map((item) => (
         <ImageListItem key={item.img}>
           <img
             srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
@@ -133,9 +136,31 @@ export default function VenueDashboard(){
         </ImageListItem>
       ))}
     </ImageList>
+    <div>
+      
     
     </div>
-
+    <React.Fragment>
+      <ImageList sx={{ width: 500, height: 450 }}>
+      
+      {previousArr.length === 0 ? (
+        <p>There are no previously rated artists, Rate some!</p>
+      ) : (previousArr.map((item) => (
+        <ImageListItem key={item.id}>
+          <img
+            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+            src={`${item.img}?w=248&fit=crop&auto=format`}
+            alt={item.title}
+            loading="lazy"
+          />
+          <ImageListItemBar
+            title={item.title}
+            position="below"
+          />
+        </ImageListItem>)
+      ))}
+      </ImageList>
+      </React.Fragment>
     </div>
       
     </>

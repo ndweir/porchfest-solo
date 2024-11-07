@@ -1,7 +1,10 @@
-import React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Avatar, Stack } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import PropTypes from 'prop-types';
+import Rating from '@mui/material/Rating';
+import MusicNoteSharpIcon from '@mui/icons-material/MusicNoteSharp';
 
 import dreyDk from '../ArtistPhotos/dreyDk.jpeg'
 import AnnieBang from '../ArtistPhotos/Annie and the Bang Bang_SmouseintheHouse-6 - Annie Enneking.jpg'
@@ -16,174 +19,131 @@ import AtomicLights from '../ArtistPhotos/AtomicLights.jpeg'
 import SeyiOyinloye from '../ArtistPhotos/SeyiOyinloye.jpg'
 import RanchoUnicorno from '../ArtistPhotos/RanchoUnicorno.jpg'
 
-import PropTypes from 'prop-types';
-import { styled } from '@mui/material/styles';
-import Rating from '@mui/material/Rating';
-import MusicNoteSharpIcon from '@mui/icons-material/MusicNoteSharp';
-import { sizeof } from 'stylis';
-import { useState } from 'react';
-import { NewReleases } from '@mui/icons-material';
 
 export default function VenueUnranked(){
+  const [previousArr, setPreviousArr] = useState(() => {
+    const savedData = localStorage.getItem('previousArr');
+    return savedData ? JSON.parse(savedData) : [];
+  });
+  const lastAction = useSelector(store => store.lastAction);
   const [rating, setRating] = useState();
   const user = useSelector(store => store.user);
   const dispatch = useDispatch();
+  const deletedArtist = localStorage.getItem('deletedArtist');
   const userId = user.id;
-  const testArtistId = 2;
-  const [previous, setPrevious] = useState([]);
+  const [artistData, setArtistData] = useState(() => {
+    const savedData = localStorage.getItem('artistData');
+    return savedData ? JSON.parse(savedData) : [
+    { img: SeyiOyinloye, title: 'Seyi Oyinloye', id: 15, rating: null},
+    { img: RanchoUnicorno, title: 'Rancho Unicorno', id: 2, rating: null },
+    { img: MommyLogBalls, title: 'Mommy Log Balls', id: 16, rating: null },
+    { img: PityParty, title: 'Pity Party', id: 14, rating: null },
+    { img: dreyDk, title: 'drey dk', id: 11, rating: null },
+    { img: AnnieBang, title: 'Annie and the Bang Bang', id: 1, rating: null },
+    { img: AtomicLights, title: 'Atomic Lights', id: 3, rating: null },
+    { img: CheapBouquet, title: 'Cheap Bouquet', id: 5, rating: null },
+    { img: HoneyPlease, title: 'Honey Please', id: 17, rating: null },
+    { img: KingSizedCoffin, title: 'King Sized Coffin', id: 9, rating: null },
+    { img: TheWalkerBrothers, title: 'The Walker Brothers', id: 12, rating: null },
+    { img: TheWeepingCovenant, title: 'The Weeping Covenant', id: 13, rating: null},
+  ];
+});
 
-  const [artistData, setArtistData] = useState([
-    {
-      img: SeyiOyinloye,
-      title: 'Seyi Oyinloye',
-      id: 15,
-    },
-    {
-      img: RanchoUnicorno,
-      title: 'Rancho Unicorno',
-      id: 2,
-    },
-    {
-      img: MommyLogBalls,
-      title: 'Mommy Log Balls',
-      id: 16,
-    },
-    {
-      img: PityParty,
-      title: 'Pity Party',
-      id: 14,
-    },
-    {
-      img: dreyDk,
-      title: 'drey dk',
-      id: 11,
-    },
-    {
-      img: AnnieBang,
-      title: 'Annie and the Bang Bang',
-      id: 1,
-    },
-    {
-      img: AtomicLights,
-      title: 'Atomic Lights',
-      id: 3,
-    },
-    {
-      img: CheapBouquet,
-      title: 'Cheap Bouquet',
-      id: 5,
-    },
-    {
-      img: HoneyPlease,
-      title: 'Honey Please',
-      id: 17,
-    },
-    {
-      img: KingSizedCoffin,
-      title: 'King Sized Coffin',
-      id: 9,
-    },
-    {
-      img: TheWalkerBrothers,
-      title: 'The Walker Brothers',
-      id: 12,
-    },
-    {
-      img: TheWeepingCovenant,
-      title: 'The Weeping Covenant',
-      id: 13,
-    },
-  ])
+  // if(deletedArtist){
+  //   const savedData = localStorage.getItem('artistData');
+  //   const artistDataArray = savedData ? JSON.parse(savedData) : [];
+  //   const deletedArtistObj = deletedArtist ? JSON.parse(deletedArtist) : [];
+  //   const newArtistsArray = artistDataArray.concat(deletedArtistObj);
 
-  const ArtistData = [
-    {
-      img: SeyiOyinloye,
-      title: 'Seyi Oyinloye',
-      id: 15,
-    },
-    {
-      img: RanchoUnicorno,
-      title: 'Rancho Unicorno',
-      id: 2,
-    },
-    {
-      img: MommyLogBalls,
-      title: 'Mommy Log Balls',
-      id: 16,
-    },
-    {
-      img: PityParty,
-      title: 'Pity Party',
-      id: 14,
-    },
-    {
-      img: dreyDk,
-      title: 'drey dk',
-      id: 11,
-    },
-    {
-      img: AnnieBang,
-      title: 'Annie and the Bang Bang',
-      id: 1,
-    },
-    {
-      img: AtomicLights,
-      title: 'Atomic Lights',
-      id: 3,
-    },
-    {
-      img: CheapBouquet,
-      title: 'Cheap Bouquet',
-      id: 5,
-    },
-    {
-      img: HoneyPlease,
-      title: 'Honey Please',
-      id: 17,
-    },
-    {
-      img: KingSizedCoffin,
-      title: 'King Sized Coffin',
-      id: 9,
-    },
-    {
-      img: TheWalkerBrothers,
-      title: 'The Walker Brothers',
-      id: 12,
-    },
-    {
-      img: TheWeepingCovenant,
-      title: 'The Weeping Covenant',
-      id: 13,
-    },
-  ]
+  //   localStorage.setItem('artistData', JSON.stringify(newArtistsArray))
+  //   localStorage.removeItem('deletedArtist')
+  // }
 
-        const deleteRating = (event) => {
-          event.preventDefault();
-      
-          let data = {
-            id: userId,
-            artist_id: PrevPicObj.id,
-            type: 'Artist',
-          }
-      
-          dispatch({
-            type: "DELETE_RATING",
-            payload: data,
-          })
-          
-            previous.push(artistData[0])
-            setArtistData(artistData.slice(1))
-        }
-      
+  // const ArtistData = [
+  //   {
+  //     img: SeyiOyinloye,
+  //     title: 'Seyi Oyinloye',
+  //     id: 15,
+  //   },
+  //   {
+  //     img: RanchoUnicorno,
+  //     title: 'Rancho Unicorno',
+  //     id: 2,
+  //   },
+  //   {
+  //     img: MommyLogBalls,
+  //     title: 'Mommy Log Balls',
+  //     id: 16,
+  //   },
+  //   {
+  //     img: PityParty,
+  //     title: 'Pity Party',
+  //     id: 14,
+  //   },
+  //   {
+  //     img: dreyDk,
+  //     title: 'drey dk',
+  //     id: 11,
+  //   },
+  //   {
+  //     img: AnnieBang,
+  //     title: 'Annie and the Bang Bang',
+  //     id: 1,
+  //   },
+  //   {
+  //     img: AtomicLights,
+  //     title: 'Atomic Lights',
+  //     id: 3,
+  //   },
+  //   {
+  //     img: CheapBouquet,
+  //     title: 'Cheap Bouquet',
+  //     id: 5,
+  //   },
+  //   {
+  //     img: HoneyPlease,
+  //     title: 'Honey Please',
+  //     id: 17,
+  //   },
+  //   {
+  //     img: KingSizedCoffin,
+  //     title: 'King Sized Coffin',
+  //     id: 9,
+  //   },
+  //   {
+  //     img: TheWalkerBrothers,
+  //     title: 'The Walker Brothers',
+  //     id: 12,
+  //   },
+  //   {
+  //     img: TheWeepingCovenant,
+  //     title: 'The Weeping Covenant',
+  //     id: 13,
+  //   },
+  // ]
+  console.log('ARTIST DATA', artistData)
+
+  console.log("STORE", JSON.parse(localStorage.getItem('artistData')))
+  console.log('previous arr', previousArr)
+  console.log("LAST ACTION: ", lastAction)
+
+  useEffect(() => {
+    localStorage.setItem('artistData', JSON.stringify(artistData));
+  }, [artistData]);
+
+  useEffect(() => {
+    localStorage.setItem('previousArr', JSON.stringify(previousArr));
+  }, [previousArr]);
+
         const saveRating = (event) => {
             event.preventDefault();
-            console.log(userId)
-            console.log(rating)
+            // console.log(userId)
+            // console.log(rating)
 
             if(artistData.length === 0) return;
-            const PrevPicObj = artistData[0]
-      
+
+            const PrevPicObj = artistData[0];
+
             let data = {
               user_id: userId,
               rating: rating,
@@ -195,13 +155,44 @@ export default function VenueUnranked(){
               type: "ADD_RATING",
               payload: data,
             });
-      
-            // iterate to next photo, change out artistID
-            setPrevious([...previous, artistData[0]])
-            setArtistData(artistData.slice(1))
-            console.log('prev', previous)
+
+            artistData[0].rating = rating;
+            const removedArtist = artistData.shift()
+            const takeOutDupes = artistData.filter(artist => artist.id !== removedArtist.id)
+            setArtistData([...takeOutDupes, removedArtist]);
+            
+            
+            setPreviousArr([...previousArr, PrevPicObj])
+
+              dispatch({
+                type: "ADD_RATED",
+                payload: PrevPicObj,
+              });
+              console.log('previously rated', previousArr)
+        };
+            
+        const skipRating = (event) => {
+          event.preventDefault();
+    
+          if(artistData.length === 0) return;
+          
+          const skippedArtist = artistData.shift();
+          const takeOutDupes = artistData.filter(artist => artist.id !== skippedArtist.id)
+          setArtistData([...takeOutDupes, skippedArtist]);
+    
+          console.log('AFTER Skip', artistData)
         }
       
+        const addArtistBack = (artist) => {
+          setArtistData([...artistData, artist]);
+        };
+
+        useEffect(() => {
+          if(lastAction && lastAction.type === "ADD_ARTIST_BACK"){
+            addArtistBack(lastAction.payload)
+          }  
+        }, [lastAction]);
+
         if(artistData.length === 0){
           return <p>No More Artists to Rate!</p>
         }
@@ -252,20 +243,20 @@ export default function VenueUnranked(){
             
           return (
               <div className="container" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-                  <h1>Rank Artists</h1>
+                  <h1>Rate Artists</h1>
               <div className='rankTitles'>
-                {previous.length > 0 && (
+                {previousArr.length > 0 && (
                   <h2>Previous</h2>
                 )}
                 <h2>Current</h2>
                 <h2>Next</h2>
               </div>
               
-              <Stack direction="row" spacing={2}>
-                {previous.length > 0 && (
+              <Stack direction="row" spacing={2} justifyContent={"space-around"}>
+                {previousArr.length > 0 && (
                   <Avatar
-                  alt={previous[previous.length - 1].title}
-                  src={previous[previous.length - 1].img}
+                  alt={previousArr[previousArr.length - 1].title}
+                  src={previousArr[previousArr.length - 1].img}
                   sx={{ width: 350, height: 350 }}
                   variant='square'
                   />
@@ -286,7 +277,7 @@ export default function VenueUnranked(){
                     />
 
             </Stack>
-            {previous.length > 0 && (
+            {previousArr.length > 0 && (
               <h2 style={{display: 'flex', justifyContent: 'center'}}>{artistData[0].title}</h2>
             )}
             
@@ -304,14 +295,13 @@ export default function VenueUnranked(){
                     highlightSelectedOnly
                     size='large'
                     value={rating}
-                    onChange={(event, newValue) => {setRating(newValue)}}
+                    onChange={(event, newValue) => setRating(newValue)}
                   />
                 <button className='btn' type='submit'>Save Rating</button>
-                <button className='btn'>Skip</button>
-                <button className='btn' onClick={deleteRating}>Delete</button>
+                <button className='btn' onClick={skipRating}>Skip</button>
               </form>
-      
+              
             </div>
-      
+    
           );
 };

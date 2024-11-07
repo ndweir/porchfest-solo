@@ -22,7 +22,7 @@ function* addRating(action){
 
 function* deleteRating(action){
     try {
-        yield axios.delete(`/api/rating`, {data: action.payload})
+        yield axios.delete(`/api/rating/${action.payload.id}`, {data: action.payload})
         yield put({type: 'FETCH_RATING'})
     } catch (error) {
         console.error('Error Deleting Rating Saga', error)

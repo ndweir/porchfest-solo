@@ -79,8 +79,10 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 // DELETE
 
-router.delete('/', rejectUnauthenticated, (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
   const {id, artist_id, venue_id, type} = req.body;
+
+  console.log('DELETE ID', id)
 
   switch (type){
     case 'Artist':{
@@ -89,9 +91,12 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
       WHERE user_id = $1 AND artist_id = $2
   `;
     const params = [id, artist_id]
-    pool.query(sqlText, params).then((result) => res.sendStatus(204)).catch((error) => {
+    pool.query(sqlText, params).then().catch((error) => {
       console.error('Error Deleting Rating', error)
-      res.sendStatus(500);
+      if(!res.headersSent){
+        res.status(500).send('Internal Server Error');
+      }
+     
     });
     };
     case 'Venue': {
@@ -100,9 +105,11 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
     WHERE user_id = $1 AND venue_id = $2
     `;
     const params = [id, venue_id]
-    pool.query(sqlText, params).then((result) => res.sendStatus(204)).catch((error) => {
+    pool.query(sqlText, params).then().catch((error) => {
       console.error('Error Deleting Rating', error)
-      res.sendStatus(500);
+      if(!res.headersSent){
+        res.status(500).send('Internal Server Error');
+      }
     });
     };
   }

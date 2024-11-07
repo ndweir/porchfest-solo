@@ -21,7 +21,7 @@ import LogoutSharpIcon from '@mui/icons-material/LogoutSharp';
 
 function Nav() {
 
-  let navBarArray = [`Dashboard`, 'Unranked', 'Previous', `Log Out`];
+  let navBarArray = [`Dashboard`, 'Unrated', 'Previous', `Log Out`];
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,9 +33,9 @@ function Nav() {
   });
 
   if(user.type === 'Artist'){
-    navBarArray = ['Dashboard', 'Rank Venues', 'Previous Ranked', `Log Out`]
+    navBarArray = ['Dashboard', 'Rate Venues', 'Previous Rated', `Log Out`]
   } else if(user.type === 'Venue'){
-    navBarArray = ['Dashboard', 'Rank Artists', 'Previous Ranked', `Log Out`]
+    navBarArray = ['Dashboard', 'Rate Artists', 'Previous Rated', `Log Out`]
   } else {
     navBarArray = ['Dashboard', 'Current Matching', `Log Out`]
   }
@@ -65,13 +65,13 @@ function Nav() {
               onClick={() => {
                 if (text === 'Dashboard') {
                   navigate('/user');
-                } else if (text === 'Rank Venues') {
+                } else if (text === 'Rate Venues') {
                   navigate('/about');
-                } else if (text === 'Rank Artists') {
+                } else if (text === 'Rate Artists') {
                   navigate('/about');
                 } else if (text === `Log Out`) {
                   dispatch({ type: 'LOGOUT' })
-                } else if (text === 'Previous Ranked') {
+                } else if (text === 'Previous Rated') {
                   navigate('/info')
                 } 
               }}

@@ -29,26 +29,35 @@ export default function VenueUnranked(){
   const [rating, setRating] = useState();
   const user = useSelector(store => store.user);
   const dispatch = useDispatch();
+  const deletedArtist = localStorage.getItem('deletedArtist');
   const userId = user.id;
   const [artistData, setArtistData] = useState(() => {
     const savedData = localStorage.getItem('artistData');
     return savedData ? JSON.parse(savedData) : [
-    { img: SeyiOyinloye, title: 'Seyi Oyinloye', id: 15 },
-    { img: RanchoUnicorno, title: 'Rancho Unicorno', id: 2 },
-    { img: MommyLogBalls, title: 'Mommy Log Balls', id: 16 },
-    { img: PityParty, title: 'Pity Party', id: 14 },
-    { img: dreyDk, title: 'drey dk', id: 11 },
-    { img: AnnieBang, title: 'Annie and the Bang Bang', id: 1 },
-    { img: AtomicLights, title: 'Atomic Lights', id: 3 },
-    { img: CheapBouquet, title: 'Cheap Bouquet', id: 5 },
-    { img: HoneyPlease, title: 'Honey Please', id: 17 },
-    { img: KingSizedCoffin, title: 'King Sized Coffin', id: 9 },
-    { img: TheWalkerBrothers, title: 'The Walker Brothers', id: 12 },
-    { img: TheWeepingCovenant, title: 'The Weeping Covenant', id: 13},
+    { img: SeyiOyinloye, title: 'Seyi Oyinloye', id: 15, rating: null},
+    { img: RanchoUnicorno, title: 'Rancho Unicorno', id: 2, rating: null },
+    { img: MommyLogBalls, title: 'Mommy Log Balls', id: 16, rating: null },
+    { img: PityParty, title: 'Pity Party', id: 14, rating: null },
+    { img: dreyDk, title: 'drey dk', id: 11, rating: null },
+    { img: AnnieBang, title: 'Annie and the Bang Bang', id: 1, rating: null },
+    { img: AtomicLights, title: 'Atomic Lights', id: 3, rating: null },
+    { img: CheapBouquet, title: 'Cheap Bouquet', id: 5, rating: null },
+    { img: HoneyPlease, title: 'Honey Please', id: 17, rating: null },
+    { img: KingSizedCoffin, title: 'King Sized Coffin', id: 9, rating: null },
+    { img: TheWalkerBrothers, title: 'The Walker Brothers', id: 12, rating: null },
+    { img: TheWeepingCovenant, title: 'The Weeping Covenant', id: 13, rating: null},
   ];
 });
 
-  
+  // if(deletedArtist){
+  //   const savedData = localStorage.getItem('artistData');
+  //   const artistDataArray = savedData ? JSON.parse(savedData) : [];
+  //   const deletedArtistObj = deletedArtist ? JSON.parse(deletedArtist) : [];
+  //   const newArtistsArray = artistDataArray.concat(deletedArtistObj);
+
+  //   localStorage.setItem('artistData', JSON.stringify(newArtistsArray))
+  //   localStorage.removeItem('deletedArtist')
+  // }
 
   // const ArtistData = [
   //   {
@@ -115,6 +124,7 @@ export default function VenueUnranked(){
   console.log('ARTIST DATA', artistData)
 
   console.log("STORE", JSON.parse(localStorage.getItem('artistData')))
+  console.log('previous arr', previousArr)
   console.log("LAST ACTION: ", lastAction)
 
   useEffect(() => {
@@ -145,10 +155,13 @@ export default function VenueUnranked(){
               type: "ADD_RATING",
               payload: data,
             });
-    
+
+            artistData[0].rating = rating;
+            const removedArtist = artistData.shift()
+            const takeOutDupes = artistData.filter(artist => artist.id !== removedArtist.id)
+            setArtistData([...takeOutDupes, removedArtist]);
             
-            const updatedArtistData = artistData.filter(artist => artist.id !== PrevPicObj.id)
-            setArtistData(updatedArtistData);
+            
             setPreviousArr([...previousArr, PrevPicObj])
 
               dispatch({
@@ -164,7 +177,8 @@ export default function VenueUnranked(){
           if(artistData.length === 0) return;
           
           const skippedArtist = artistData.shift();
-          setArtistData([...artistData, skippedArtist]);
+          const takeOutDupes = artistData.filter(artist => artist.id !== skippedArtist.id)
+          setArtistData([...takeOutDupes, skippedArtist]);
     
           console.log('AFTER Skip', artistData)
         }
@@ -229,7 +243,7 @@ export default function VenueUnranked(){
             
           return (
               <div className="container" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-                  <h1>Rank Artists</h1>
+                  <h1>Rate Artists</h1>
               <div className='rankTitles'>
                 {previousArr.length > 0 && (
                   <h2>Previous</h2>

@@ -88,7 +88,6 @@ export default function ArtistDashboard(){
     <>
      <div className="container">
       <h1>Welcome, {user.username}!</h1>
-        <p>Your ID is: {user.id}</p>
         <h2 style={{display:'flex', justifyContent: 'center'}}>{user.type} Dashboard</h2>
       </div>
       

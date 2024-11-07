@@ -36,8 +36,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
       let sqlText = `
       INSERT INTO "booking" (user_id, rating, artist_id)
         VALUES ($1, $2, $3)
-        ON CONFLICT (user_id, artist_id)
-        DO UPDATE SET rating = EXCLUDED.rating
         RETURNING "ratingId";
     `
       let params = [user_id, rating, artist_id];
@@ -57,8 +55,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
       let sqlText = `
         INSERT INTO "booking" (user_id, rating, venue_id)
           VALUES ($1, $2, $3)
-          ON CONFLICT (user_id, venue_id)
-          DO UPDATE SET rating = EXCLUDED.rating
           RETURNING "ratingId";
         `
       let params = [user_id, rating, venue_id];
@@ -114,4 +110,48 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
     };
   }
 })
+
+router.put('/', rejectUnauthenticated, (req, res) => {
+  console.log('incoming rating PUT', req.body)
+  const {type, user_id, rating, artist_id, venue_id} = req.body
+  let params = [];
+  let sqlText;
+
+  switch (type) {
+    case 'Artist': {
+      sqlText = `
+      UPDATE "booking"
+      SET rating = $1
+      WHERE user_id = $2 AND artist_id = $3
+      RETURNING "ratingId";
+      `;
+      params = [rating, user_id, artist_id];
+      break;
+    }
+    case 'Venue': {
+      sqlText = `
+      UPDATE "booking"
+      SET rating = $1
+      WHERE user_id = $2 AND venue_id = $3
+      RETURNING "ratingId";
+      `;
+      params = [rating, user_id, venue_id];
+      break;
+  }
+
+  }
+
+  pool.query(sqlText, params).then((result) => {
+    if(result.rows === 0){
+      return res.status(404).send('Rating Not Found');
+    }
+
+  }).catch((err) => {
+    res.sendStatus(500);
+  })
+
+})
+
+
+
 module.exports = router;

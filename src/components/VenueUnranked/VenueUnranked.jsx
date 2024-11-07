@@ -244,13 +244,25 @@ export default function VenueUnranked(){
           return (
               <div className="container" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
                   <h1>Rate Artists</h1>
-              <div className='rankTitles'>
-                {previousArr.length > 0 && (
-                  <h1>Previous</h1>
-                )}
-                <h1>Current</h1>
-                <h1>Next</h1>
-              </div>
+            
+              {previousArr.length > 0 && (
+              <h1 style={{display: 'flex', justifyContent: 'center', marginBottom: '30px'}}>{artistData[0].title}</h1>
+            )}
+
+                    <form style={{display: 'flex', justifyContent: 'center'}} onSubmit={saveRating}>
+                        <StyledRating
+                              name="highlight-selected-only"
+                              defaultValue={3}
+                              IconContainerComponent={IconContainer}
+                              getLabelText={(value) => {customIcons[value].label}}
+                              highlightSelectedOnly
+                              size='large'
+                              value={rating}
+                              onChange={(event, newValue) => setRating(newValue)}
+                            />
+                          <button className='btn' type='submit'>Save Rating</button>
+                          <button className='btn' onClick={skipRating}>Skip</button>
+                        </form>
               
               <Stack direction="row" spacing={2} justifyContent={"space-around"} >
                 {previousArr.length > 0 && (
@@ -277,30 +289,21 @@ export default function VenueUnranked(){
                     />
 
             </Stack>
-            {previousArr.length > 0 && (
-              <h1 style={{display: 'flex', justifyContent: 'center', marginBottom: '30px'}}>{artistData[0].title}</h1>
-            )}
+            
             
 
               {/* <h4>Select a rating below, click to confirm your selection</h4>
               <h4>Once your selection is confirmed, click save to save your rating and move to the next selection</h4>
               <h4>Click Skip to go to the next selection without saving your rating</h4> */}
-          
-            <form style={{display: 'flex', justifyContent: 'center'}} onSubmit={saveRating}>
-              <StyledRating
-                    name="highlight-selected-only"
-                    defaultValue={3}
-                    IconContainerComponent={IconContainer}
-                    getLabelText={(value) => {customIcons[value].label}}
-                    highlightSelectedOnly
-                    size='large'
-                    value={rating}
-                    onChange={(event, newValue) => setRating(newValue)}
-                  />
-                <button className='btn' type='submit'>Save Rating</button>
-                <button className='btn' onClick={skipRating}>Skip</button>
-              </form>
               
+              <div className='rankTitles'>
+                {previousArr.length > 0 && (
+                  <h1>Previous</h1>
+                )}
+                <h1>Current</h1>
+                <h1>Next</h1>
+              </div>
+
             </div>
     
           );

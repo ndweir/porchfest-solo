@@ -29,10 +29,20 @@ function* deleteRating(action){
     }
 }
 
+function* putRating(action){
+    try {
+        yield axios.put('/api/rating/', action.payload)
+        yield put({type: 'FETCH_RATING'})
+    } catch (error) {
+        console.error('ERROR PUT Rating Saga', error)
+    }
+}
+
 function* ratingSaga(){
     yield takeLatest('FETCH_RATING', fetchRating)
     yield takeLatest('ADD_RATING', addRating)
     yield takeLatest('DELETE_RATING', deleteRating)
+    yield takeLatest('UPDATE_RATING', putRating)
 }
 
 export default ratingSaga;

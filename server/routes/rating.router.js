@@ -36,6 +36,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
       let sqlText = `
       INSERT INTO "booking" (user_id, rating, artist_id)
         VALUES ($1, $2, $3)
+        ON CONFLICT (user_id, artist_id)
+        DO UPDATE SET rating = EXCLUDED.rating
         RETURNING "ratingId";
     `
       let params = [user_id, rating, artist_id];
@@ -55,6 +57,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
       let sqlText = `
         INSERT INTO "booking" (user_id, rating, venue_id)
           VALUES ($1, $2, $3)
+          ON CONFLICT (user_id, venue_id)
+          DO UPDATE SET rating = EXCLUDED.rating
           RETURNING "ratingId";
         `
       let params = [user_id, rating, venue_id];

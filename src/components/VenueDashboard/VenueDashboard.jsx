@@ -44,6 +44,7 @@ const [player, setPlayer] = useState(null);
 const [isPaused, setIsPaused] = useState(true);
 const [currentTrack, setCurrentTrack] = useState(null);
 const [deviceId, setDeviceId] = useState(null);
+const [tokenExpirationTime, setTokenExpirationTime] = useState(Date.now() + 3600 * 500)
 
 useEffect(() => {
   const script = document.createElement("script");
@@ -82,8 +83,9 @@ useEffect(() => {
 
   const refreshAccessToken = async () => {
     const response = await axios.post('/refresh_token', { refresh_token: refreshToken })
-    setAccessToken(response.data.access_token)
-  }
+    setAccessToken(response.data.access_token);
+    setTokenExpirationTime(Date.now() + response.data.expires_in * 500)
+  };
 
   useEffect(() => {
     const fetchArtistUris = async () => {
@@ -103,6 +105,16 @@ useEffect(() => {
 
     fetchArtistUris();
   }, [accessToken]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if(Date.now() >= tokenExpirationTime - 60000){
+        refreshAccessToken()
+      }
+    }, 60000)
+
+    return () => clearInterval(interval);
+  }, [tokenExpirationTime]);
 
   const playArtist = async (spotifyUri) => {
     const token = accessToken; // Replace with your Spotify OAuth token

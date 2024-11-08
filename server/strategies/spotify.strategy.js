@@ -7,6 +7,8 @@ passport.use(new SpotifyStrategy({
   callbackURL: process.env.SPOTIFY_CALLBACK_URL
 }, (accessToken, refreshToken, expires_in, profile, done) => {
   // Save user profile and tokens
+  profile.accessToken = accessToken;
+  profile.refreshToken = refreshToken;
   return done(null, profile);
 }));
 

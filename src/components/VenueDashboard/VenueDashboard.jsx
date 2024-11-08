@@ -20,6 +20,10 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 export default function VenueDashboard(){
+  const [accessToken, setAccessToken] = useState(`BQBruo_FOvQQ-rUSTwi4XYqYXbzdZgF1etDNqnGlMbE2WiKTYWK4TSln8OLcAEHuMI9IeTTq19KnN4M0rMJ8MCyNC8kjzDNV9KGKoWfEXkS6MErS90zjuKWSeMIU9BCX_ivaedCCNQqbHAxJnrnB1hva6iPZOJAoPW1wBx-nNs0WM9MhPcv0ROitNj1w1r8_vejwxtp58UG3vjlz
+`); // Replace with your initial Spotify OAuth token
+  const [refreshToken, setRefreshToken] = useState('YOUR_SPOTIFY_REFRESH_TOKEN'); // Replace with your Spotify refresh token
+
   const user = useSelector((store) => store.user);
   const [artistData, setArtistData] = useState([
     { img: dreyDk, title: 'drey dk', id: 11 },
@@ -48,11 +52,9 @@ useEffect(() => {
   document.body.appendChild(script);
 
   window.onSpotifyWebPlaybackSDKReady = () => {
-    const token = `BQBruo_FOvQQ-rUSTwi4XYqYXbzdZgF1etDNqnGlMbE2WiKTYWK4TSln8OLcAEHuMI9IeTTq19KnN4M0rMJ8MCyNC8kjzDNV9KGKoWfEXkS6MErS90zjuKWSeMIU9BCX_ivaedCCNQqbHAxJnrnB1hva6iPZOJAoPW1wBx-nNs0WM9MhPcv0ROitNj1w1r8_vejwxtp58UG3vjlz
-`;
       const player = new window.Spotify.Player({
           name: 'Web Playback SDK',
-          getOAuthToken: cb => { cb(token); },
+          getOAuthToken: cb => { cb(accessToken); },
           volume: 0.5
       });
 
@@ -76,12 +78,16 @@ useEffect(() => {
       })
       player.connect();
   };
-}, []);
+}, [accessToken]);
+
+  const refreshAccessToken = async () => {
+    const response = await axios.post('/refresh_token', { refresh_token: refreshToken })
+    setAccessToken(response.data.access_token)
+  }
 
   useEffect(() => {
     const fetchArtistUris = async () => {
-      const token = `BQBruo_FOvQQ-rUSTwi4XYqYXbzdZgF1etDNqnGlMbE2WiKTYWK4TSln8OLcAEHuMI9IeTTq19KnN4M0rMJ8MCyNC8kjzDNV9KGKoWfEXkS6MErS90zjuKWSeMIU9BCX_ivaedCCNQqbHAxJnrnB1hva6iPZOJAoPW1wBx-nNs0WM9MhPcv0ROitNj1w1r8_vejwxtp58UG3vjlz
-`;
+      const token = accessToken;
       const updatedArtistData = await Promise.all(artistData.map(async (artist) => {
         const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(artist.title)}&type=artist`, {
           headers: {
@@ -96,11 +102,10 @@ useEffect(() => {
     };
 
     fetchArtistUris();
-  }, []);
+  }, [accessToken]);
 
   const playArtist = async (spotifyUri) => {
-    const token = `BQBruo_FOvQQ-rUSTwi4XYqYXbzdZgF1etDNqnGlMbE2WiKTYWK4TSln8OLcAEHuMI9IeTTq19KnN4M0rMJ8MCyNC8kjzDNV9KGKoWfEXkS6MErS90zjuKWSeMIU9BCX_ivaedCCNQqbHAxJnrnB1hva6iPZOJAoPW1wBx-nNs0WM9MhPcv0ROitNj1w1r8_vejwxtp58UG3vjlz
-`; // Replace with your Spotify OAuth token
+    const token = accessToken; // Replace with your Spotify OAuth token
     const response = await fetch(`https://api.spotify.com/v1/artists/${spotifyUri.split(':')[2]}/top-tracks?market=US`, {
       headers: {
         'Authorization': `Bearer ${token}`,

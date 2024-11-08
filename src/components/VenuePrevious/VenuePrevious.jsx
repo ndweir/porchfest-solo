@@ -146,7 +146,7 @@ export default function VenuePrevious(){
         const { value, ...other } = props;
         return <span {...other}>
         <div>{customIcons[value].icon}</div>
-        <h6>{customIcons[value].label}</h6>
+        {/* <h6>{customIcons[value].label}</h6> */}
         </span>;
       }
       
@@ -171,6 +171,8 @@ export default function VenuePrevious(){
             <h1>Previously Rated Artists</h1>
 
                 <h1 className='rankTitles'>{currentObj.title}</h1>
+            
+
                 <form style={{display: 'flex', justifyContent: 'center'}} onSubmit={putRating}>
           <StyledRating
                 name="highlight-selected-only"

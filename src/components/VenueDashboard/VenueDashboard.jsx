@@ -56,30 +56,14 @@ export default function VenueDashboard(){
   const [isPaused, setIsPaused] = useState(true);
   const [currentTrack, setCurrentTrack] = useState(null);
   const [deviceId, setDeviceId] = useState(null);
-  const [accessToken, setAccessToken] = useState(`BQA5tRc10OTYtS2F45PbKb-e6-O8Z6RQdev_cOlVeJpuNDU_ez6UuVORgX3PzpClGk3JEf2X7IE8pVC9Fd7F1qhnUT13sHEJQuCSG1pbPCEbEfp-i642GIswSk54_i75luFV2hzGbW6Tuo2Cn7IIITAGPCm3yF46Mg1mvy_03XtE9xI2fUTvxMttNZzVcYLiGoQfaVD-1Qk1KULd
+  const [accessToken, setAccessToken] = useState(`BQAECAyq0ytAoE3Aj5x1cD7eYtCynSXPDPTNoJQ1I10yH-iM5FfKlRFpW2DuGxuYrltS2S24MrfUPEBHwNeTCQipgs-nd81utRrD2on1fY55MoGGEutCBgO7abVGboSnO3ACrNS3SDUEM_NM64XJtqga1BRdYd8oM9a_aavh5Kt_ijbrNfGZUTdFlXMg39QSLGV-fjzgsknJf8Ps
 `); 
  const [expandedBio, setExpandedBio] = useState(null);
 
- useEffect(() => {
-  const fetchAccessToken = async () => {
-    try {
-      const response = await axios.get('/api/user/access_token'); 
-      setAccessToken(response.data.accessToken);
-      setTokenExpirationTime(Date.now() + response.data.expiresIn * 1000);
-    } catch (error) {
-      console.error('Error fetching access token:', error);
-    }
-  };
-
-  if (!accessToken) {
-    fetchAccessToken();
-  }
-}, [accessToken]);
-
 useEffect(() => {
   if (!accessToken) return;
-  const script = document.createElement("script");
-  script.src = "https://sdk.scdn.co/spotify-player.js";
+  const script = document.createElement('script');
+  script.src = 'https://sdk.scdn.co/spotify-player.js';
   script.async = true;
   document.body.appendChild(script);
 
@@ -87,13 +71,10 @@ useEffect(() => {
       const player = new window.Spotify.Player({
           name: 'Web Playback SDK',
           getOAuthToken: cb => { 
-            if(accessToken){
-              cb(accessToken);
-            } else {
-              console.error('Access Token Not Available')
-            }
+            cb(accessToken);
              },
-          volume: 0.5
+          volume: 0.5,
+          robustness: 'SW_SECURE_CRYPTO'
       });
 
       setPlayer(player);
@@ -144,14 +125,19 @@ useEffect(() => {
 
 
   const playArtist = async (spotifyUri) => {
+    if(!player){
+      console.error('Player is not initialized!');
+      return;
+    }
+
     try {
       if (currentTrack && currentTrack.artists[0].uri === spotifyUri) {
           if(isPaused){
             player.resume().then(() => {
               setIsPaused(false);
             }).catch((error) => {
-              console.error("Error Resuming Playback", error);
-            })
+              console.error('Error Pausing Playback', error);
+            });
           } else {
             player.pause().then(() => {
               setIsPaused(true);
@@ -234,73 +220,6 @@ useEffect(() => {
   console.log("sorted artists a-z!!", sortedArtists)
 
   return (
-    // <>
-    //  <div className="container">
-    //   <h1>Welcome, {user.username}!</h1>
-    //     <h2 style={{display:'flex', justifyContent: 'center'}}>{user.type} Dashboard</h2>
-    //   </div>
-      
-    //   <div className='div-imageList-title'>
-    //     <h3>All Artists</h3>
-    //     {previousArr.length === 0 ? <p></p> : (
-    //        <h3>Recently Rated Artists </h3>
-    //     ) }
-    //   </div>
-      
-    // <div className='image-list-div'>
-    // <ImageList sx={{ width: 800, height: 650 }}>
-    //   {sortedArtists.map((item) => (
-    //     <ImageListItem key={item.img} onClick={() => playArtist(item.spotifyUri)}>
-    //       <img
-    //         srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-    //         src={`${item.img}?w=248&fit=crop&auto=format`}
-    //         alt={item.title}
-    //         loading="lazy"
-    //       />
-    //       <ImageListItemBar
-    //         title={item.title}
-    //         position="below"
-    //       />
-    //     </ImageListItem>
-    //   ))}
-    // </ImageList>
-    // <div>
-      
-    
-    // </div>
-    // <React.Fragment>
-    //   <ImageList sx={{ width: 800, height: 650 }}>
-      
-    //   {previousArr.length === 0 ? (
-    //     <p>There are no previously rated artists, Rate some!</p>
-    //   ) : (previousArr.map((item) => (
-    //     <ImageListItem key={item.id}>
-    //       <img
-    //         srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-    //         src={`${item.img}?w=248&fit=crop&auto=format`}
-    //         alt={item.title}
-    //         loading="lazy"
-    //       />
-    //       <ImageListItemBar
-    //         title={item.title}
-    //         position="below"
-    //       />
-    //     </ImageListItem>)
-    //   ))}
-    //   </ImageList>
-    //   </React.Fragment>
-    // </div>
-      
-    //   {currentTrack && (
-    //     <div>
-    //       <h3>Now Playing: {currentTrack.name} by {currentTrack.artists[0].name}</h3>
-    //       <button onClick={() => player.togglePlay()}>{isPaused ? 'Play' : 'Pause'}</button>
-
-    //     </div>
-
-    //   )}
-
-    // </>
     
 
     <div>
@@ -344,15 +263,9 @@ useEffect(() => {
               <CardActions>
                 <IconButton onClick={() => playArtist(item.spotifyUri)}>
                   {currentTrack && currentTrack.artists[0].name === item.title && !isPaused ? (
-                    <><PauseIcon />
-                    <p>Pause</p>
-                    </>
+                    <PauseIcon />
                   ) : (
-
-                    <>
                     <PlayArrowIcon />
-                    <p>Play</p>
-                    </>
                   )}
                 </IconButton>
               </CardActions>

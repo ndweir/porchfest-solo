@@ -5,10 +5,10 @@ passport.use(new SpotifyStrategy({
   clientID: process.env.SPOTIFY_CLIENT_ID,
   clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
   callbackURL: process.env.SPOTIFY_CALLBACK_URL
-}, (accessToken, refreshToken, expires_in, profile, done) => {
+}, (accessToken, expires_in, profile, done) => {
   // Save user profile and tokens
   profile.accessToken = accessToken;
-  profile.refreshToken = refreshToken;
+  profile.expires_in = expires_in;
   return done(null, profile);
 }));
 
@@ -21,5 +21,6 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((obj, done) => {
   done(null, obj);
 });
+
 
 module.exports = passport;

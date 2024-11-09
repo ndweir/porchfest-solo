@@ -109,7 +109,7 @@ function Nav() {
               <React.Fragment key={anchor}>
                 <Button onClick={toggleDrawer('left', true)}
                 style={{color: 'white', backgroundColor: 'black'}}
-                ><DensityMediumSharpIcon></DensityMediumSharpIcon></Button>
+                ><DensityMediumSharpIcon className="icon-large" ></DensityMediumSharpIcon></Button>
                 <SwipeableDrawer
                   anchor={anchor}
                   open={state[anchor]}

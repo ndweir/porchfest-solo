@@ -3,8 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  margin: 0 0 30px;
+  margin: 0 0 10px;
   background-color: #000000;
   overflow: hidden;
 }
@@ -14,7 +13,7 @@
 }
 
 .nav-title {
-  font-size: 24px;
+  font-size: 36px;
   font-weight: 700;
   color: #f2f2f2;
   padding-left: 10px;
@@ -39,4 +38,18 @@
 
 .navLink:hover {
   background-color: #000000;
+}
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-3 .MuiCard-root {
+  /* Add styles for the cards */
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 16px 16px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-3 .MuiCard-root:hover {
+  /* Add styles for the cards */
+  transform: scale(1.05);
+  background-color: #f5f5f5;
 }

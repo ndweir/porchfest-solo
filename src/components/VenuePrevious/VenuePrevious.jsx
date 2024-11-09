@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import Rating from '@mui/material/Rating';
 import MusicNoteSharpIcon from '@mui/icons-material/MusicNoteSharp';
 import { sizeof } from 'stylis';
+import Swal from 'sweetalert2';
 
 import dreyDk from '../ArtistPhotos/dreyDk.jpeg'
 import AnnieBang from '../ArtistPhotos/Annie and the Bang Bang_SmouseintheHouse-6 - Annie Enneking.jpg'
@@ -42,6 +43,48 @@ export default function VenuePrevious(){
     //   console.log('previousArr updated', previousArr);
     // }, [previousArr]);
 
+
+    const handleUpdateRating = (event) => {
+      event.preventDefault();
+      Swal.fire({
+        title:'Are you sure?',
+        text: 'If you update now your current rating will be deleted',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#5cb85c',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'Cancel'
+
+
+      }).then((result) => {
+        if(result.isConfirmed){
+          putRating(event);
+        }
+      })
+    }
+
+    const handleDeleteRating = (event) => {
+      event.preventDefault();
+      Swal.fire({
+        title:'Are you sure?',
+        text: 'If you delete now not your current rating will be deleted',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#5cb85c',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'Cancel'
+
+
+      }).then((result) => {
+        if(result.isConfirmed){
+          deleteRating(event);
+        }
+      })
+    }
+
+
     const putRating = (event) => {
       event.preventDefault();
   
@@ -67,11 +110,12 @@ export default function VenuePrevious(){
       });
       
       console.log('BEFORE PUT: ', previousArr)
+      const updatedArtist = {...firstRatedObj, rating: rating};
       const removedArtist = previousArr.shift()
       console.log('AFTER SHIFT: ', previousArr)
       const takeOutDupes = previousArr.filter(artist => artist.id !== removedArtist.id)
       console.log('TAKE OUT DUPES AFTER FILTER', takeOutDupes)
-      setPreviousArr([...takeOutDupes, removedArtist]);
+      setPreviousArr([...takeOutDupes, updatedArtist]);
       console.log('AFTER PUT: ', previousArr)
 
     }
@@ -171,9 +215,10 @@ export default function VenuePrevious(){
             <h1>Previously Rated Artists</h1>
 
                 <h1 className='rankTitles'>{currentObj.title}</h1>
-            
+                <h2 style={{fontStyle: 'italic'}} className='rankTitles'>{currentObj.genre}</h2>
+                  <h2 className='rankTitles'>Current Rating: {currentObj.rating}</h2>
 
-                <form style={{display: 'flex', justifyContent: 'center'}} onSubmit={putRating}>
+                <form style={{display: 'flex', justifyContent: 'center'}} onSubmit={handleUpdateRating}>
           <StyledRating
                 name="highlight-selected-only"
                 defaultValue={3}
@@ -186,7 +231,7 @@ export default function VenuePrevious(){
               />
               <button className='btn' type='submit'>Update Rating</button>
               <button className='btn' onClick={skipRating}>Skip</button>
-              <button className='btn' onClick={deleteRating}>Delete</button>
+              <button className='btn' onClick={handleDeleteRating}>Delete</button>
             </form>
         
 

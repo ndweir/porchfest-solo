@@ -4,6 +4,7 @@ require('dotenv').config();
 const PORT = process.env.PORT || 5001;
 const axios = require('axios');
 const querystring = require('querystring');
+const session = require('express-session');
 
 // Middleware Includes
 const sessionMiddleware = require('./modules/session-middleware');
@@ -15,7 +16,7 @@ const userRouter = require('./routes/user.router');
 const ratingRouter = require('./routes/rating.router');
 
 
-function configureServer(app){
+
   // Express Middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -23,6 +24,11 @@ app.use(express.static('build'));
 
 // Passport Session Configuration
 app.use(sessionMiddleware);
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true
+}));
 
 // Start Passport Sessions
 app.use(passport.initialize());
@@ -36,10 +42,12 @@ app.use(spotifyPassport.session());
 app.use('/api/user', userRouter);
 app.use('/api/rating', ratingRouter);
 
-app.get('/auth/spotify', spotifyPassport.authenticate('spotify'));
-app.get('/auth/spotify/callback', spotifyPassport.authenticate('spotify', {failureRedirect: '/'}), (req, res) => {
-  req.session.refreshToken = req.user.refreshToken
-  res.redirect('/')
+app.get('/auth/spotify', spotifyPassport.authenticate('spotify', {
+  scope: ['user-read-playback-state', 'user-modify-playback-state', 'user-read-private', 'user-read-email']
+}));
+
+app.get('/auth/spotify/callback', spotifyPassport.authenticate('spotify', { failureRedirect: '/' }), (req, res) => {
+  res.redirect('/');
 });
 
 app.post('/refresh_token', async (req, res) => {
@@ -59,9 +67,6 @@ app.post('/refresh_token', async (req, res) => {
   });
 
 
-}
-
-configureServer(app);
 
 // Listen Server & Port
 app.listen(PORT, () => {

@@ -56,8 +56,7 @@ export default function VenueDashboard(){
   const [isPaused, setIsPaused] = useState(true);
   const [currentTrack, setCurrentTrack] = useState(null);
   const [deviceId, setDeviceId] = useState(null);
-  const [accessToken, setAccessToken] = useState(`BQDa9S5aeJWMAxzXXXjAReSG3WJ6Eh8126Y_B8Ep2MzvE3qD9MH1wK1X1Uh2LEt3BC0uBkkub8ApPuENo49ClM0DwoqDre__M31MR884drnLRr-BR7FLA8lRowHG6fET3YbecZ-Z_5H17pEnQgFInIJbJmUVsWxRA26u4HltTic3b_UbtaLZMC6Dl3szupAtztXxH1cU5InqwUXk
-
+  const [accessToken, setAccessToken] = useState(`BQAgAbYsB-5bkj-abjk49Q6gDEN3P91Qx8LdEsIQxF89MC25jBVp4Sml9UgkIaYV3AnFFmLyaQiDkWdbGCpeKyTvPu3beEQfZKtgr-qDT8Pfp0q2x2FZiqJDTgLyses8kenkGJ-qCznYPOVQjpOYMe1zbVP0D6soXtwpygqHhyyG69KZnepzUHaXoXp8_sUuthun9u64Xpzs2b9o
 `); 
  const [expandedBio, setExpandedBio] = useState(null);
 

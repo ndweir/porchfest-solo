@@ -38,6 +38,7 @@ app.use('/api/rating', ratingRouter);
 
 app.get('/auth/spotify', spotifyPassport.authenticate('spotify'));
 app.get('/auth/spotify/callback', spotifyPassport.authenticate('spotify', {failureRedirect: '/'}), (req, res) => {
+  req.session.refreshToken = req.user.refreshToken
   res.redirect('/')
 });
 
@@ -56,6 +57,7 @@ app.post('/refresh_token', async (req, res) => {
 
     res.json(response.data);
   });
+
 
 }
 

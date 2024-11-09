@@ -56,7 +56,7 @@ export default function VenueDashboard(){
   const [isPaused, setIsPaused] = useState(true);
   const [currentTrack, setCurrentTrack] = useState(null);
   const [deviceId, setDeviceId] = useState(null);
-  const [accessToken, setAccessToken] = useState(`BQAgAbYsB-5bkj-abjk49Q6gDEN3P91Qx8LdEsIQxF89MC25jBVp4Sml9UgkIaYV3AnFFmLyaQiDkWdbGCpeKyTvPu3beEQfZKtgr-qDT8Pfp0q2x2FZiqJDTgLyses8kenkGJ-qCznYPOVQjpOYMe1zbVP0D6soXtwpygqHhyyG69KZnepzUHaXoXp8_sUuthun9u64Xpzs2b9o
+  const [accessToken, setAccessToken] = useState(`BQA5tRc10OTYtS2F45PbKb-e6-O8Z6RQdev_cOlVeJpuNDU_ez6UuVORgX3PzpClGk3JEf2X7IE8pVC9Fd7F1qhnUT13sHEJQuCSG1pbPCEbEfp-i642GIswSk54_i75luFV2hzGbW6Tuo2Cn7IIITAGPCm3yF46Mg1mvy_03XtE9xI2fUTvxMttNZzVcYLiGoQfaVD-1Qk1KULd
 `); 
  const [expandedBio, setExpandedBio] = useState(null);
 
@@ -130,6 +130,7 @@ useEffect(() => {
         });
         const data = await response.json();
         const artistUri = data.artists.items[0]?.uri || '';
+        console.log('Artist URI', artistUri)
         return { ...artist, spotifyUri: artistUri };
       }));
       setArtistData(updatedArtistData);
@@ -144,13 +145,20 @@ useEffect(() => {
 
   const playArtist = async (spotifyUri) => {
     try {
-      if (currentTrack && currentTrack.artists[0].uri === spotifyUri && !isPaused) {
-        player.pause().then(() => {
-          setIsPaused(true);
-        }).catch((err) => {
-          console.error('Error Pausing', err)
-        });
-       
+      if (currentTrack && currentTrack.artists[0].uri === spotifyUri) {
+          if(isPaused){
+            player.resume().then(() => {
+              setIsPaused(false);
+            }).catch((error) => {
+              console.error("Error Resuming Playback", error);
+            })
+          } else {
+            player.pause().then(() => {
+              setIsPaused(true);
+            }).catch((err) => {
+              console.error('Error Pausing', err)
+            });
+          }
       } else {
         const token = accessToken;
         const response = await fetch(`https://api.spotify.com/v1/artists/${spotifyUri.split(':')[2]}/top-tracks?market=US`, {
@@ -181,10 +189,12 @@ useEffect(() => {
                   'Content-Type': 'application/json',
                   'Authorization': `Bearer ${access_token}`,
                 },
+              }).then(() => {
+                setIsPaused(false);
+                setCurrentTrack(data.tracks[0]);
               }).catch((error) => {
                 console.error('Error playing track:', error);
               });
-              setIsPaused(false);
             }).catch((error) => {
               console.error('Error transferring playback:', error);
             });

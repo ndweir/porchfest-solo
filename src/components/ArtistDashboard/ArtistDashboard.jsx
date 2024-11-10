@@ -6,6 +6,10 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import card from "../assets/theme/components/card/index"
+import IconButton from '@mui/material/IconButton';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
+import { makeStyles } from '@mui/styles';
 
 import RadioDr from '../VenuePhotos/RadioDr.jpeg'
 import BryantAve from '../VenuePhotos/BryantAve.jpeg'
@@ -152,10 +156,10 @@ export default function ArtistDashboard(){
   
   return (
     <div>
-      <h2>Artist Dashboard</h2>
+      <h2 style={{ display: 'flex', justifyContent: 'center', fontFamily: "Ewert", fontWeight: '400', fontStyle: 'normal'}}>{user.type} Dashboard</h2>
       {mapViewVisible && 
       <>
-        <h1 style={{ textAlign: 'center'}}>{currentVenueTitle}</h1>
+        <h1 style={{ textAlign: 'center', fontFamily: 'Rye'}}>{currentVenueTitle}</h1>
         <div id="map" style={{ height: '350px' }}></div>
       </>
       }
@@ -171,12 +175,12 @@ export default function ArtistDashboard(){
                 alt={item.title}
               />
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye", fontSize: 'large'}}>
                   {item.title}
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button onClick={() => handleMapViewClick(item)}>
+                <Button className='btn' onClick={() => handleMapViewClick(item)}>
                   {mapViewVisible ? 'Hide Map View' : 'Map View'}
                 </Button>
               </CardActions>

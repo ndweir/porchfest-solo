@@ -192,135 +192,114 @@ export default function VenueUnranked(){
               
                 <>
                   <h1 style={{display: 'flex', justifyContent: 'center', fontFamily: "Ewert"}}>{artistData[0].title}</h1>
-                  <h2 style={{display: 'flex', justifyContent: 'center', marginBottom: '85px'}}>{artistData[0].genre}</h2>
+                  <h2 style={{display: 'flex', justifyContent: 'center', marginBottom: '10px'}}>{artistData[0].genre}</h2>
                 </>
               
                      <div className="tooltip" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-                            <span className="tooltiptext">Rate 1 to 5</span>
-                            
                             <h4 style={{display: 'flex', justifyContent: 'center'}}>Your current rating: {rating}</h4>
-                            <form style={{display: 'flex', justifyContent: 'center'}} onSubmit={saveRating}>
+                            {/* <span className="tooltiptext">Rate 1 to 5</span> */}
+                            <div style={{display: 'flex', justifyContent: 'space-evenly'}}>
+                            <form onSubmit={saveRating}>
                 
+                            
+                                    <StyledRating
+                                        name="highlight-selected-only"
+                                        defaultValue={3}
+                                        IconContainerComponent={IconContainer}
+                                        getLabelText={(value) => {customIcons[value].label}}
+                                        highlightSelectedOnly
+                                        size='large'
+                                        value={rating}
+                                        onChange={(event, newValue) => setRating(newValue)}
+                                        style={{margin: '20px'}}
+                                      />
+                                <button className='Rating-btn' type='submit'>Save Rating</button>
+                                <button className='Rating-btn' onClick={skipRating}  style={{margin: '10px'}} >Skip</button>
 
-                                <StyledRating
-                                  name="highlight-selected-only"
-                                  defaultValue={3}
-                                  IconContainerComponent={IconContainer}
-                                  getLabelText={(value) => {customIcons[value].label}}
-                                  highlightSelectedOnly
-                                  size='large'
-                                  value={rating}
-                                  onChange={(event, newValue) => setRating(newValue)}
-                                />
-                          <button className='btn' type='submit'>Save Rating</button>
-                          <button className='btn' onClick={skipRating}>Skip</button>
+                                   
+                                
                         </form>
-              
+                        </div>
                             
                           </div>
-                    
-              {/* <Stack direction="row" spacing={2} justifyContent={"space-around"} >
-                {previousArr.length > 0 && (
-                  <Avatar
-                  alt={previousArr[previousArr.length - 1].title}
-                  src={previousArr[previousArr.length - 1].img}
-                  sx={{ maxWidth: 450, maxHeight: 450, width: 450, height: 450}}
-                  variant='square'
-                  />
-                )}
-
-                    <Avatar
-                    alt={artistData[0].title}
-                    src={artistData[0].img}
-                    sx={{ maxWidth: 750, maxHeight: 650, width: 750, height:  650}}
-                    variant='square'
-                    />
-                    
-                    <Avatar
-                    alt={artistData[1].title}
-                    src={artistData[1].img}
-                    sx={{ maxWidth: 450, maxHeight: 450, width: 450, height:  450}}
-                    variant='square'
-                    />
-
-            </Stack> */}
             
-            <Grid container spacing={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'space-evenly' }}>,
             {
-      <Grid item xs={12} sm={7} sx={{ display: 'flex', flexDirection: 'row'}}>
-    
-      <Card style={{maxWidth: 300, maxHeight: 200, width: 450, height:  350}}>
-        <CardMedia
-          component="img"
-          height="450"
-          image={previousArr[previousArr.length - 1].img}
-          alt={previousArr[previousArr.length - 1].title}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye"}}>
-          {previousArr[previousArr.length - 1].title}
-          </Typography>
-        </CardContent> 
-      </Card>
+      
+            <div style={{display: 'flex', justifyContent: 'space-evenly'}}>
+              <Card style={{maxWidth: 350, maxHeight: 375, width: 350, height:  400, opacity: '0.5'}}>
+              <CardMedia
+                component="img"
+                height="450"
+                image={previousArr[previousArr.length - 1].img}
+                alt={previousArr[previousArr.length - 1].title}
+                style={{maxWidth: 300, maxHeight: 275, width: 300, height:  275, alignSelf: 'center'}}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye", alignSelf: 'center'}}>
+                {previousArr[previousArr.length - 1].title}
+                </Typography>
+              </CardContent> 
+            </Card>
+
+            <Card style={{maxWidth: 600, maxHeight: 450, width: 650, height:  450, boxShadow: '0 16px 16px rgb(0, 0, 0, 0.4)'}}>
+              <CardMedia
+                component="img"
+                height="750"
+                width="750"
+                image={artistData[0].img}
+                alt={artistData[0].title}
+                style={{maxWidth: 550, maxHeight: 350, width: 550, height:  350, alignSelf: 'center'}}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye", alignSelf: 'center'}}>
+                {artistData[0].title}
+                </Typography>
+              </CardContent> 
+            </Card>
+          
+
+
 
       
-      
-      <Card style={{maxWidth: 600, maxHeight: 300, width: 750, height:  650}}>
-        <CardMedia
-          component="img"
-          height="750"
-          width="750"
-          image={artistData[0].img}
-          alt={artistData[0].title}
-           style={{maxWidth: 400, maxHeight: 200, width: 720, height:  450}}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye"}}>
-          {artistData[0].title}
-          </Typography>
-        </CardContent> 
-      </Card>
-    
+            <Card style={{maxWidth: 350, maxHeight: 375, width: 350, height:  400, opacity: '0.5'}}>
+              <CardMedia
+                component="img"
+                height="450"
+                image={artistData[1].img}
+                alt={artistData[1].title}
+                style={{maxWidth: 300, maxHeight: 275, width: 300, height:  275, alignSelf: 'center'}}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye"}}>
+                {artistData[1].title}
+                </Typography>
+              </CardContent> 
+            </Card>
 
+            </div>
+      
+      
 
 
  
-      <Card style={{maxWidth: 300, maxHeight: 200, width: 300, height:  200}}>
-        <CardMedia
-          component="img"
-          height="450"
-          image={artistData[1].img}
-          alt={artistData[1].title}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye"}}>
-          {artistData[1].title}
-          </Typography>
-        </CardContent> 
-      </Card>
-
-
-    </Grid>
       
       }
-      </Grid>
           
             
-            
-
-              {/* <h4>Select a rating below, click to confirm your selection</h4>
-              <h4>Once your selection is confirmed, click save to save your rating and move to the next selection</h4>
-              <h4>Click Skip to go to the next selection without saving your rating</h4> */}
-              
-              <div className='rankTitles'>
-                {previousArr.length > 0 && (
-                  <h1>Previous</h1>
-                )}
-                <h1>Current</h1>
-                <h1>Next</h1>
-              </div>
+    
 
             </div>
     
           );
 };
+
+
+
+/* 
+
+
+
+
+
+
+*/

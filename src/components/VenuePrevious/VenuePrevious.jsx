@@ -223,12 +223,12 @@ export default function VenuePrevious(){
             <h1>Previously Rated Artists</h1>
 
                 <h1 style={{display: 'flex', justifyContent: 'center', fontFamily: "Ewert"}}>{currentObj.title}</h1>
-                <h2  className='rankTitles'>{currentObj.genre}</h2>
-                  <h3 className='rankTitles'>Current Rating: {currentObj.rating}</h3>
+                <h2 style={{display: 'flex', justifyContent: 'center'}}>{currentObj.genre}</h2>
+                  <h3 style={{display: 'flex', justifyContent: 'center'}}>Current Rating: {currentObj.rating}</h3>
                   <h3 style={{display: 'flex', justifyContent: 'center'}}>New Rating: {rating}</h3>
 
-
-                <form style={{display: 'flex', justifyContent: 'center'}} onSubmit={handleUpdateRating}>
+        <div style={{marginBottom: '20px'}}>
+        <form style={{display: 'flex', justifyContent: 'center'}} onSubmit={handleUpdateRating}>
           <StyledRating
                 name="highlight-selected-only"
                 defaultValue={3}
@@ -238,22 +238,23 @@ export default function VenuePrevious(){
                 size='large'
                 value={rating}
                 onChange={(event, newValue) => {setRating(newValue)}}
+                style={{margin: '10px'}}
               />
-              <button className='btn' type='submit'>Update Rating</button>
-              <button className='btn' onClick={skipRating}>Skip</button>
-              <button className='btn' onClick={handleDeleteRating}>Delete</button>
+              <button className='Rating-btn' type='submit'>Update Rating</button>
+              <button className='Rating-btn' onClick={skipRating} >Skip</button>
+              <button className='Rating-btn' onClick={handleDeleteRating}>Delete</button>
             </form>
 
-<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-<Card style={{maxWidth: 450, maxHeight: 350, width: 450, height:  350}}>
+        </div>
+                
+
+  <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+  <Card className='Card-current'>
         <CardMedia
           component="img"
-          maxHeight={400}
-          maxWidth = {300}
-          height={300}
-          width={400}
           image={currentObj.img}
           alt={currentObj.title}
+          style={{maxWidth: 550, maxHeight: 350, width: 550, height:  350, alignSelf: 'center'}}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye"}}>
@@ -263,22 +264,10 @@ export default function VenuePrevious(){
       </Card>
 
 
-</div>
-     
+    </div>
 
-
-      <div className='rankTitles' style={{fontFamily: 'Ewert'}}>
-          <h2>Current Previously Rated</h2>
-        </div>
-       
-        {/* <h4>Select a rating below, click to confirm your selection</h4>
-        <h4>Once your selection is confirmed, click save to save your rating and move to the next selection</h4>
-        <h4 style={{ marginBottom: '40px' }}>Click Skip to go to the next selection without saving your rating</h4>
-
-        */}
-
-      
-      </div>
+    </div>
 
     );
 }
+

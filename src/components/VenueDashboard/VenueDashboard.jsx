@@ -59,7 +59,7 @@ export default function VenueDashboard(){
   const [isPaused, setIsPaused] = useState(true);
   const [currentTrack, setCurrentTrack] = useState(null);
   const [deviceId, setDeviceId] = useState(null);
-  const [accessToken, setAccessToken] = useState(`BQCHA032HVCfHgafxIX_o9beeq3l5L9uzYU7gcj_3b_Vyqsgr5QgDit1paRmoIKTkHP8J8lBNnV1_KyXz5qwwAmxv7Xx9uYIsQvbcuwakn21dxT-lk9Cc99dejyNNjshJ99m5Kqo3SBHmJ743VEGlAq_8Ag3GR4nZQdzJrzllq7INQ3xDhujP36Hn5UtaQSRbt9AAuJXM_TttNK_
+  const [accessToken, setAccessToken] = useState(`BQC__ZGki4ayGN4YaRA-pTlSh9aJKKA_OedOV8mLLyyJHkxzf_C32uW4N2VVA2EFwNxXdASA-NrR9w2WRLQGV6fGBl-WEE_cOVvuZvNxkbIBwfxHwtTdzIFUC9IYS6tOU1TXzPJwaWkAl_iN_GazaAASSq63M02O08j6EoFc7KwUkMxVa7bfByMuUop8XmcoyxWNCJf9bkNzx_zn
 `); 
  const [expandedBio, setExpandedBio] = useState(null);
 
@@ -246,7 +246,7 @@ useEffect(() => {
       )}
 
       {isPaused ? (
-        <Wave fill='	#1DB954'
+        <Wave fill='#000000'
          paused={true}
          style={{ display: 'flex' }}
          options={{
@@ -257,7 +257,7 @@ useEffect(() => {
        }} />
 
       ) : (
-        <Wave fill='	#1DB954'
+        <Wave fill='#000000'
          paused={false}
          style={{ display: 'flex' }}
          options={{
@@ -286,7 +286,7 @@ useEffect(() => {
                 style={getCardMediaStyle(item.id)}
               />
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye"}}>
+                <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye", fontSize: 'large'}}>
                   {item.title}
                 </Typography>
                 <Typography 
@@ -294,7 +294,7 @@ useEffect(() => {
                 color="text.secondary"
                 noWrap= {!expandedBio || expandedBio !== item.id}
                 onClick={() => handleBioClick(item.id)}
-                style={{ cursor: 'pointer', fontFamily: "Sancreek" }}
+                style={{ cursor: 'pointer', fontFamily: "Sancreek", fontSize: 'medium' }}
                 >
                   {item.bio}
                 </Typography>

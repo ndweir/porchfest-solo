@@ -8,6 +8,17 @@ import Rating from '@mui/material/Rating';
 import MusicNoteSharpIcon from '@mui/icons-material/MusicNoteSharp';
 import { sizeof } from 'stylis';
 import { Description } from '@mui/icons-material';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import CardActions from '@mui/material/CardActions';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
+import { makeStyles } from '@mui/styles';
+
 
 import RadioDr from '../VenuePhotos/RadioDr.jpeg'
 import BryantAve from '../VenuePhotos/BryantAve.jpeg'
@@ -234,76 +245,107 @@ if(venueData.length === 0){
     
     return (
       <div className="container" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-      <h1>Rate Venues</h1>
-  
-    <>
-      <h1 style={{display: 'flex', justifyContent: 'center'}}>{venueData[0].title}</h1>
-      <h2 style={{display: 'flex', justifyContent: 'center', marginBottom: '60px'}}>{venueData[0].genre}</h2>
-    </>
-  
-         <div className="tooltip" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-                <span className="tooltiptext">Rate 1 to 5</span>
-                <form style={{display: 'flex', justifyContent: 'center'}} onSubmit={saveRating}>
+                  <h1>Rate Venues</h1>
+              
+                <>
+                  <h1 style={{display: 'flex', justifyContent: 'center', fontFamily: "Ewert"}}>{venueData[0].title}</h1>
+                  <h2 style={{display: 'flex', justifyContent: 'center', marginBottom: '10px'}}>{venueData[0].genre}</h2>
+                </>
+              
+                     <div className="tooltip" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+                            <h4 style={{display: 'flex', justifyContent: 'center'}}>Your current rating: {rating}</h4>
+                            <div style={{display: 'flex', justifyContent: 'space-evenly'}}>
+                            <form onSubmit={saveRating}>
+                
+                            
+                                    <StyledRating
+                                        name="highlight-selected-only"
+                                        defaultValue={3}
+                                        IconContainerComponent={IconContainer}
+                                        getLabelText={(value) => {customIcons[value].label}}
+                                        highlightSelectedOnly
+                                        size='large'
+                                        value={rating}
+                                        onChange={(event, newValue) => setRating(newValue)}
+                                        style={{margin: '20px'}}
+                                      />
+                                <button className='Rating-btn' type='submit'>Save Rating</button>
+                                <button className='Rating-btn' onClick={skipRating}  style={{margin: '10px'}} >Skip</button>
+
+                                   
+                                
+                        </form>
+                        </div>
+                            
+                          </div>
+            
+            {
+      
+            <div style={{display: 'flex', justifyContent: 'space-evenly'}}>
+              <Card style={{maxWidth: 350, maxHeight: 375, width: 350, height:  400, opacity: '0.5'}}>
+              <CardMedia
+                component="img"
+                height="450"
+                image={previousVenue[previousVenue.length - 1].img}
+                alt={previousVenue[previousVenue.length - 1].title}
+                style={{maxWidth: 300, maxHeight: 275, width: 300, height:  275, alignSelf: 'center'}}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye", alignSelf: 'center'}}>
+                {previousVenue[previousVenue.length - 1].title}
+                </Typography>
+              </CardContent> 
+            </Card>
+
+            <Card style={{maxWidth: 600, maxHeight: 450, width: 650, height:  450, boxShadow: '0 16px 16px rgb(0, 0, 0, 0.4)'}}>
+              <CardMedia
+                component="img"
+                height="750"
+                width="750"
+                image={venueData[0].img}
+                alt={venueData[0].title}
+                style={{maxWidth: 550, maxHeight: 350, width: 550, height:  350, alignSelf: 'center'}}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye", alignSelf: 'center'}}>
+                {venueData[0].title}
+                </Typography>
+              </CardContent> 
+            </Card>
+          
+
+
+
+      
+            <Card style={{maxWidth: 350, maxHeight: 375, width: 350, height:  400, opacity: '0.5'}}>
+              <CardMedia
+                component="img"
+                height="450"
+                image={venueData[1].img}
+                alt={venueData[1].title}
+                style={{maxWidth: 300, maxHeight: 275, width: 300, height:  275, alignSelf: 'center'}}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye"}}>
+                {venueData[1].title}
+                </Typography>
+              </CardContent> 
+            </Card>
+
+            </div>
+      
+      
+
+
+ 
+      
+      }
+          
+            
     
 
-                    <StyledRating
-                      name="highlight-selected-only"
-                      defaultValue={3}
-                      IconContainerComponent={IconContainer}
-                      getLabelText={(value) => {customIcons[value].label}}
-                      highlightSelectedOnly
-                      size='large'
-                      value={rating}
-                      onChange={(event, newValue) => setRating(newValue)}
-                    />
-              <button className='btn' type='submit'>Save Rating</button>
-              <button className='btn' onClick={skipRating}>Skip</button>
-            </form>
-  
-                
-              </div>
-        
-  <Stack direction="row" spacing={2} justifyContent={"space-around"} >
-    {previousVenue.length > 0 && (
-      <Avatar
-      alt={previousVenue[previousVenue.length - 1].title}
-      src={previousVenue[previousVenue.length - 1].img}
-      sx={{ maxWidth: 450, maxHeight: 450, width: 450, height: 450}}
-      variant='square'
-      />
-    )}
+            </div>
 
-        <Avatar
-        alt={venueData[0].title}
-        src={venueData[0].img}
-        sx={{ maxWidth: 750, maxHeight: 650, width: 750, height:  650}}
-        variant='square'
-        />
-        
-        <Avatar
-        alt={venueData[1].title}
-        src={venueData[1].img}
-        sx={{ maxWidth: 450, maxHeight: 450, width: 450, height:  450}}
-        variant='square'
-        />
-
-</Stack>
-
-
-
-  {/* <h4>Select a rating below, click to confirm your selection</h4>
-  <h4>Once your selection is confirmed, click save to save your rating and move to the next selection</h4>
-  <h4>Click Skip to go to the next selection without saving your rating</h4> */}
-  
-  <div className='rankTitles'>
-    {previousVenue.length > 0 && (
-      <h1>Previous</h1>
-    )}
-    <h1>Current</h1>
-    <h1>Next</h1>
-  </div>
-
-</div>
 
     );
 }

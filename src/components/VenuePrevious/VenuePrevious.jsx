@@ -39,11 +39,6 @@ export default function VenuePrevious(){
     const dispatch = useDispatch();
     const userId = user.id;
 
-    // useEffect(() => {
-    //   console.log('previousArr updated', previousArr);
-    // }, [previousArr]);
-
-
     const handleUpdateRating = (event) => {
       event.preventDefault();
       Swal.fire({

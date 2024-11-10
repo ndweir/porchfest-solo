@@ -6,6 +6,16 @@ import PropTypes from 'prop-types';
 import Rating from '@mui/material/Rating';
 import MusicNoteSharpIcon from '@mui/icons-material/MusicNoteSharp';
 import '../App/App.css';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import CardActions from '@mui/material/CardActions';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
+import { makeStyles } from '@mui/styles';
 
 import dreyDk from '../ArtistPhotos/dreyDk.jpeg'
 import AnnieBang from '../ArtistPhotos/Annie and the Bang Bang_SmouseintheHouse-6 - Annie Enneking.jpg'
@@ -181,12 +191,14 @@ export default function VenueUnranked(){
                   <h1>Rate Artists</h1>
               
                 <>
-                  <h1 style={{display: 'flex', justifyContent: 'center'}}>{artistData[0].title}</h1>
-                  <h2 style={{display: 'flex', justifyContent: 'center', marginBottom: '60px'}}>{artistData[0].genre}</h2>
+                  <h1 style={{display: 'flex', justifyContent: 'center', fontFamily: "Ewert"}}>{artistData[0].title}</h1>
+                  <h2 style={{display: 'flex', justifyContent: 'center', marginBottom: '85px'}}>{artistData[0].genre}</h2>
                 </>
               
                      <div className="tooltip" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
                             <span className="tooltiptext">Rate 1 to 5</span>
+                            
+                            <h4 style={{display: 'flex', justifyContent: 'center'}}>Your current rating: {rating}</h4>
                             <form style={{display: 'flex', justifyContent: 'center'}} onSubmit={saveRating}>
                 
 
@@ -207,7 +219,7 @@ export default function VenueUnranked(){
                             
                           </div>
                     
-              <Stack direction="row" spacing={2} justifyContent={"space-around"} >
+              {/* <Stack direction="row" spacing={2} justifyContent={"space-around"} >
                 {previousArr.length > 0 && (
                   <Avatar
                   alt={previousArr[previousArr.length - 1].title}
@@ -231,7 +243,68 @@ export default function VenueUnranked(){
                     variant='square'
                     />
 
-            </Stack>
+            </Stack> */}
+            
+            <Grid container spacing={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'space-evenly' }}>,
+            {
+      <Grid item xs={12} sm={7} sx={{ display: 'flex', flexDirection: 'row'}}>
+    
+      <Card style={{maxWidth: 300, maxHeight: 200, width: 450, height:  350}}>
+        <CardMedia
+          component="img"
+          height="450"
+          image={previousArr[previousArr.length - 1].img}
+          alt={previousArr[previousArr.length - 1].title}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye"}}>
+          {previousArr[previousArr.length - 1].title}
+          </Typography>
+        </CardContent> 
+      </Card>
+
+      
+      
+      <Card style={{maxWidth: 600, maxHeight: 300, width: 750, height:  650}}>
+        <CardMedia
+          component="img"
+          height="750"
+          width="750"
+          image={artistData[0].img}
+          alt={artistData[0].title}
+           style={{maxWidth: 400, maxHeight: 200, width: 720, height:  450}}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye"}}>
+          {artistData[0].title}
+          </Typography>
+        </CardContent> 
+      </Card>
+    
+
+
+
+ 
+      <Card style={{maxWidth: 300, maxHeight: 200, width: 300, height:  200}}>
+        <CardMedia
+          component="img"
+          height="450"
+          image={artistData[1].img}
+          alt={artistData[1].title}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye"}}>
+          {artistData[1].title}
+          </Typography>
+        </CardContent> 
+      </Card>
+
+
+    </Grid>
+      
+      }
+      </Grid>
+          
             
             
 

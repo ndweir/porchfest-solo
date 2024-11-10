@@ -8,6 +8,17 @@ import Rating from '@mui/material/Rating';
 import MusicNoteSharpIcon from '@mui/icons-material/MusicNoteSharp';
 import { sizeof } from 'stylis';
 import Swal from 'sweetalert2';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import CardActions from '@mui/material/CardActions';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
+import { makeStyles } from '@mui/styles';
+import Wave from 'react-wavify';
 
 import dreyDk from '../ArtistPhotos/dreyDk.jpeg'
 import AnnieBang from '../ArtistPhotos/Annie and the Bang Bang_SmouseintheHouse-6 - Annie Enneking.jpg'
@@ -205,13 +216,17 @@ export default function VenuePrevious(){
         return (<p>No artist found</p>);
       }
 
+      
     return (
         <div className="container" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+            
             <h1>Previously Rated Artists</h1>
 
-                <h1 className='rankTitles'>{currentObj.title}</h1>
-                <h2 style={{fontStyle: 'italic'}} className='rankTitles'>{currentObj.genre}</h2>
-                  <h2 className='rankTitles'>Current Rating: {currentObj.rating}</h2>
+                <h1 style={{display: 'flex', justifyContent: 'center', fontFamily: "Ewert"}}>{currentObj.title}</h1>
+                <h2  className='rankTitles'>{currentObj.genre}</h2>
+                  <h3 className='rankTitles'>Current Rating: {currentObj.rating}</h3>
+                  <h3 style={{display: 'flex', justifyContent: 'center'}}>New Rating: {rating}</h3>
+
 
                 <form style={{display: 'flex', justifyContent: 'center'}} onSubmit={handleUpdateRating}>
           <StyledRating
@@ -228,20 +243,31 @@ export default function VenuePrevious(){
               <button className='btn' onClick={skipRating}>Skip</button>
               <button className='btn' onClick={handleDeleteRating}>Delete</button>
             </form>
-        
 
-        
-        
-         <Stack direction="row" spacing={2} justifyContent={"center"} style={{ marginBottom: '20px' }}>
-        <Avatar
+<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+<Card style={{maxWidth: 450, maxHeight: 350, width: 450, height:  350}}>
+        <CardMedia
+          component="img"
+          maxHeight={400}
+          maxWidth = {300}
+          height={300}
+          width={400}
+          image={currentObj.img}
           alt={currentObj.title}
-          src={currentObj.img}
-          sx={{ width: 850, height: 600}}
-          variant='square'
         />
-      </Stack >
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye"}}>
+          {currentObj.title}
+          </Typography>
+        </CardContent> 
+      </Card>
 
-      <div className='rankTitles'>
+
+</div>
+     
+
+
+      <div className='rankTitles' style={{fontFamily: 'Ewert'}}>
           <h2>Current Previously Rated</h2>
         </div>
        

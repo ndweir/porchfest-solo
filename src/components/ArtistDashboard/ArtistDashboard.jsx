@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
+import card from "../assets/theme/components/card/index"
 
 import RadioDr from '../VenuePhotos/RadioDr.jpeg'
 import BryantAve from '../VenuePhotos/BryantAve.jpeg'

@@ -28,6 +28,9 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
+import { makeStyles } from '@mui/styles';
+import card from "../assets/theme/components/card/index"
+import Wave from 'react-wavify';
 
 export default function VenueDashboard(){
   const user = useSelector((store) => store.user);
@@ -56,7 +59,7 @@ export default function VenueDashboard(){
   const [isPaused, setIsPaused] = useState(true);
   const [currentTrack, setCurrentTrack] = useState(null);
   const [deviceId, setDeviceId] = useState(null);
-  const [accessToken, setAccessToken] = useState(`BQAECAyq0ytAoE3Aj5x1cD7eYtCynSXPDPTNoJQ1I10yH-iM5FfKlRFpW2DuGxuYrltS2S24MrfUPEBHwNeTCQipgs-nd81utRrD2on1fY55MoGGEutCBgO7abVGboSnO3ACrNS3SDUEM_NM64XJtqga1BRdYd8oM9a_aavh5Kt_ijbrNfGZUTdFlXMg39QSLGV-fjzgsknJf8Ps
+  const [accessToken, setAccessToken] = useState(`BQCHA032HVCfHgafxIX_o9beeq3l5L9uzYU7gcj_3b_Vyqsgr5QgDit1paRmoIKTkHP8J8lBNnV1_KyXz5qwwAmxv7Xx9uYIsQvbcuwakn21dxT-lk9Cc99dejyNNjshJ99m5Kqo3SBHmJ743VEGlAq_8Ag3GR4nZQdzJrzllq7INQ3xDhujP36Hn5UtaQSRbt9AAuJXM_TttNK_
 `); 
  const [expandedBio, setExpandedBio] = useState(null);
 
@@ -157,7 +160,7 @@ useEffect(() => {
 
         if (topTrackUri) {
           player._options.getOAuthToken((access_token) => {
-            fetch(`https://api.spotify.com/v1/me/player`, {
+             fetch(`https://api.spotify.com/v1/me/player`, {
               method: 'PUT',
               body: JSON.stringify({
                 device_ids: [deviceId],
@@ -168,7 +171,7 @@ useEffect(() => {
                 'Authorization': `Bearer ${access_token}`,
               },
             }).then(() => {
-              fetch(`https://api.spotify.com/v1/me/player/play`, {
+               fetch(`https://api.spotify.com/v1/me/player/play`, {
                 method: 'PUT',
                 body: JSON.stringify({ uris: [topTrackUri] }),
                 headers: {
@@ -219,21 +222,57 @@ useEffect(() => {
 
   console.log("sorted artists a-z!!", sortedArtists)
 
+
+  const cardStyles = makeStyles(() => ({
+    root: card.styleOverrides.root,
+  }));
+
+  // font-family: "Ewert", serif;
+  // font-weight: 400;
+  // font-style: normal;
+
   return (
     
 
     <div>
-      <h1>Welcome, {user.username}!</h1>
-      <p>Your ID is: {user.id}</p>
-      <h2 style={{ display: 'flex', justifyContent: 'center' }}>{user.type} Dashboard</h2>
+      <h2 style={{ display: 'flex', justifyContent: 'center', fontFamily: "Ewert", fontWeight: '400', fontStyle: 'normal'}}>{user.type} Dashboard</h2>
 
       {currentTrack && (
         <div style={{ marginTop: '20px', textAlign: 'center' }}>
-          <Typography variant="h4">
+          <Typography variant="h4" style={{marginBottom: '10px', fontFamily: "Rye"}}>
             Now Playing: {currentTrack.name} by {currentTrack.artists[0].name}
           </Typography>
         </div>
       )}
+
+      {isPaused ? (
+        <Wave fill='	#1DB954'
+         paused={true}
+         style={{ display: 'flex' }}
+         options={{
+         height: 20,
+         amplitude: 20,
+         speed: 0.3,
+         points: 3
+       }} />
+
+      ) : (
+        <Wave fill='	#1DB954'
+         paused={false}
+         style={{ display: 'flex' }}
+         options={{
+         height: 40,
+         amplitude: 40,
+         speed: 0.3,
+         points: 3
+       }} />
+
+      )
+    
+    }
+      {/* font-family: "Ewert", serif;
+  font-weight: 400;
+  font-style: normal; */}
 
       <Grid container spacing={3}>
         {sortedArtists.map((item) => (
@@ -247,7 +286,7 @@ useEffect(() => {
                 style={getCardMediaStyle(item.id)}
               />
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye"}}>
                   {item.title}
                 </Typography>
                 <Typography 
@@ -255,7 +294,7 @@ useEffect(() => {
                 color="text.secondary"
                 noWrap= {!expandedBio || expandedBio !== item.id}
                 onClick={() => handleBioClick(item.id)}
-                style={{ cursor: 'pointer' }}
+                style={{ cursor: 'pointer', fontFamily: "Sancreek" }}
                 >
                   {item.bio}
                 </Typography>
@@ -279,3 +318,4 @@ useEffect(() => {
 
   );
 }
+

@@ -57,7 +57,7 @@ function Nav() {
     
 
 
-    <Box>
+    <Box >
       <List>
         {navBarArray.map((text, index) => (
           <ListItem key={text} disablePadding>
@@ -76,7 +76,7 @@ function Nav() {
                 } 
               }}
             >
-              <ListItemText primary={text} />
+              <ListItemText primary={text}  />
             </ListItemButton>
           </ListItem>
         ))}

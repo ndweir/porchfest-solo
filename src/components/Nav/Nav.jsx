@@ -57,7 +57,7 @@ function Nav() {
     
 
 
-    <Box>
+    <Box >
       <List>
         {navBarArray.map((text, index) => (
           <ListItem key={text} disablePadding>
@@ -76,7 +76,7 @@ function Nav() {
                 } 
               }}
             >
-              <ListItemText primary={text} />
+              <ListItemText primary={text}  />
             </ListItemButton>
           </ListItem>
         ))}
@@ -109,7 +109,7 @@ function Nav() {
               <React.Fragment key={anchor}>
                 <Button onClick={toggleDrawer('left', true)}
                 style={{color: 'white', backgroundColor: 'black'}}
-                ><DensityMediumSharpIcon></DensityMediumSharpIcon></Button>
+                ><DensityMediumSharpIcon className="icon-large" ></DensityMediumSharpIcon></Button>
                 <SwipeableDrawer
                   anchor={anchor}
                   open={state[anchor]}

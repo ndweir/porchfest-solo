@@ -6,6 +6,16 @@ import PropTypes from 'prop-types';
 import Rating from '@mui/material/Rating';
 import MusicNoteSharpIcon from '@mui/icons-material/MusicNoteSharp';
 import '../App/App.css';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import CardActions from '@mui/material/CardActions';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
+import { makeStyles } from '@mui/styles';
 
 import dreyDk from '../ArtistPhotos/dreyDk.jpeg'
 import AnnieBang from '../ArtistPhotos/Annie and the Bang Bang_SmouseintheHouse-6 - Annie Enneking.jpg'
@@ -56,82 +66,6 @@ export default function VenueUnranked(){
 `, bio: `Based in St. Paul, MN, The Weeping Covenant is headed by vocalist and songwriter, Michael Beatrez. Writing from a lyrically driven perspective, he generally touches on themes of hope, vulnerability, and love. Beatrez leans into his comfortable sweet spot by singing over soft fingerstyle guitar ballads and rock songs that drive with measured intensity.`},
   ];
 });
-
-// , genre: ``, bio: ``
-
-  // if(deletedArtist){
-  //   const savedData = localStorage.getItem('artistData');
-  //   const artistDataArray = savedData ? JSON.parse(savedData) : [];
-  //   const deletedArtistObj = deletedArtist ? JSON.parse(deletedArtist) : [];
-  //   const newArtistsArray = artistDataArray.concat(deletedArtistObj);
-
-  //   localStorage.setItem('artistData', JSON.stringify(newArtistsArray))
-  //   localStorage.removeItem('deletedArtist')
-  // }
-
-  // const ArtistData = [
-  //   {
-  //     img: SeyiOyinloye,
-  //     title: 'Seyi Oyinloye',
-  //     id: 15,
-  //   },
-  //   {
-  //     img: RanchoUnicorno,
-  //     title: 'Rancho Unicorno',
-  //     id: 2,
-  //   },
-  //   {
-  //     img: MommyLogBalls,
-  //     title: 'Mommy Log Balls',
-  //     id: 16,
-  //   },
-  //   {
-  //     img: PityParty,
-  //     title: 'Pity Party',
-  //     id: 14,
-  //   },
-  //   {
-  //     img: dreyDk,
-  //     title: 'drey dk',
-  //     id: 11,
-  //   },
-  //   {
-  //     img: AnnieBang,
-  //     title: 'Annie and the Bang Bang',
-  //     id: 1,
-  //   },
-  //   {
-  //     img: AtomicLights,
-  //     title: 'Atomic Lights',
-  //     id: 3,
-  //   },
-  //   {
-  //     img: CheapBouquet,
-  //     title: 'Cheap Bouquet',
-  //     id: 5,
-  //   },
-  //   {
-  //     img: HoneyPlease,
-  //     title: 'Honey Please',
-  //     id: 17,
-  //   },
-  //   {
-  //     img: KingSizedCoffin,
-  //     title: 'King Sized Coffin',
-  //     id: 9,
-  //   },
-  //   {
-  //     img: TheWalkerBrothers,
-  //     title: 'The Walker Brothers',
-  //     id: 12,
-  //   },
-  //   {
-  //     img: TheWeepingCovenant,
-  //     title: 'The Weeping Covenant',
-  //     id: 13,
-  //   },
-  // ]
-  console.log('ARTIST DATA', artistData)
 
   console.log("STORE", JSON.parse(localStorage.getItem('artistData')))
   console.log('previous arr', previousArr)
@@ -257,73 +191,115 @@ export default function VenueUnranked(){
                   <h1>Rate Artists</h1>
               
                 <>
-                  <h1 style={{display: 'flex', justifyContent: 'center'}}>{artistData[0].title}</h1>
-                  <h2 style={{display: 'flex', justifyContent: 'center', marginBottom: '60px'}}>{artistData[0].genre}</h2>
+                  <h1 style={{display: 'flex', justifyContent: 'center', fontFamily: "Ewert"}}>{artistData[0].title}</h1>
+                  <h2 style={{display: 'flex', justifyContent: 'center', marginBottom: '10px'}}>{artistData[0].genre}</h2>
                 </>
               
                      <div className="tooltip" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-                            <span className="tooltiptext">Rate 1 to 5</span>
-                            <form style={{display: 'flex', justifyContent: 'center'}} onSubmit={saveRating}>
+                            <h4 style={{display: 'flex', justifyContent: 'center'}}>Your current rating: {rating}</h4>
+                            {/* <span className="tooltiptext">Rate 1 to 5</span> */}
+                            <div style={{display: 'flex', justifyContent: 'space-evenly'}}>
+                            <form onSubmit={saveRating}>
                 
+                            
+                                    <StyledRating
+                                        name="highlight-selected-only"
+                                        defaultValue={3}
+                                        IconContainerComponent={IconContainer}
+                                        getLabelText={(value) => {customIcons[value].label}}
+                                        highlightSelectedOnly
+                                        size='large'
+                                        value={rating}
+                                        onChange={(event, newValue) => setRating(newValue)}
+                                        style={{margin: '20px'}}
+                                      />
+                                <button className='Rating-btn' type='submit'>Save Rating</button>
+                                <button className='Rating-btn' onClick={skipRating}  style={{margin: '10px'}} >Skip</button>
 
-                                <StyledRating
-                                  name="highlight-selected-only"
-                                  defaultValue={3}
-                                  IconContainerComponent={IconContainer}
-                                  getLabelText={(value) => {customIcons[value].label}}
-                                  highlightSelectedOnly
-                                  size='large'
-                                  value={rating}
-                                  onChange={(event, newValue) => setRating(newValue)}
-                                />
-                          <button className='btn' type='submit'>Save Rating</button>
-                          <button className='btn' onClick={skipRating}>Skip</button>
+                                   
+                                
                         </form>
-              
+                        </div>
                             
                           </div>
-                    
-              <Stack direction="row" spacing={2} justifyContent={"space-around"} >
-                {previousArr.length > 0 && (
-                  <Avatar
-                  alt={previousArr[previousArr.length - 1].title}
-                  src={previousArr[previousArr.length - 1].img}
-                  sx={{ maxWidth: 450, maxHeight: 450, width: 450, height: 450}}
-                  variant='square'
-                  />
-                )}
-
-                    <Avatar
-                    alt={artistData[0].title}
-                    src={artistData[0].img}
-                    sx={{ maxWidth: 750, maxHeight: 650, width: 750, height:  650}}
-                    variant='square'
-                    />
-                    
-                    <Avatar
-                    alt={artistData[1].title}
-                    src={artistData[1].img}
-                    sx={{ maxWidth: 450, maxHeight: 450, width: 450, height:  450}}
-                    variant='square'
-                    />
-
-            </Stack>
             
-            
+            {
+      
+            <div style={{display: 'flex', justifyContent: 'space-evenly'}}>
+              <Card style={{maxWidth: 350, maxHeight: 375, width: 350, height:  400, opacity: '0.5'}}>
+              <CardMedia
+                component="img"
+                height="450"
+                image={previousArr[previousArr.length - 1].img}
+                alt={previousArr[previousArr.length - 1].title}
+                style={{maxWidth: 300, maxHeight: 275, width: 300, height:  275, alignSelf: 'center'}}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye", alignSelf: 'center'}}>
+                {previousArr[previousArr.length - 1].title}
+                </Typography>
+              </CardContent> 
+            </Card>
 
-              {/* <h4>Select a rating below, click to confirm your selection</h4>
-              <h4>Once your selection is confirmed, click save to save your rating and move to the next selection</h4>
-              <h4>Click Skip to go to the next selection without saving your rating</h4> */}
-              
-              <div className='rankTitles'>
-                {previousArr.length > 0 && (
-                  <h1>Previous</h1>
-                )}
-                <h1>Current</h1>
-                <h1>Next</h1>
-              </div>
+            <Card style={{maxWidth: 600, maxHeight: 450, width: 650, height:  450, boxShadow: '0 16px 16px rgb(0, 0, 0, 0.4)'}}>
+              <CardMedia
+                component="img"
+                height="750"
+                width="750"
+                image={artistData[0].img}
+                alt={artistData[0].title}
+                style={{maxWidth: 550, maxHeight: 350, width: 550, height:  350, alignSelf: 'center'}}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye", alignSelf: 'center'}}>
+                {artistData[0].title}
+                </Typography>
+              </CardContent> 
+            </Card>
+          
+
+
+
+      
+            <Card style={{maxWidth: 350, maxHeight: 375, width: 350, height:  400, opacity: '0.5'}}>
+              <CardMedia
+                component="img"
+                height="450"
+                image={artistData[1].img}
+                alt={artistData[1].title}
+                style={{maxWidth: 300, maxHeight: 275, width: 300, height:  275, alignSelf: 'center'}}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div" style={{fontFamily: "Rye"}}>
+                {artistData[1].title}
+                </Typography>
+              </CardContent> 
+            </Card>
+
+            </div>
+      
+      
+
+
+ 
+      
+      }
+          
+            
+    
 
             </div>
     
           );
 };
+
+
+
+/* 
+
+
+
+
+
+
+*/

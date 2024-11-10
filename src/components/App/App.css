@@ -1,12 +1,13 @@
-html,
-body,
+
 #react-root {
   height: 100%;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Sancreek", serif !important;
+  font-weight: 400;
   margin: 0px;
+  font-size: x-large;
 }
 
 img {
@@ -36,6 +37,9 @@ Img List
 .div-imageList-title{
   display: flex;
   justify-content: space-around;
+  font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  font-size: x-large;
 }
 
 /* --------------------------------------------------------------------------------
@@ -48,11 +52,28 @@ Button
   border-color: whitesmoke;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #000000;
+  background-color: #000000 !important;
   color: whitesmoke;
   font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
+  font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  margin: 0px;
+  font-size: x-large;
+}
+
+.Rating-btn {
+  padding: 10px 20px;
+  border-color: whitesmoke;
+  border-radius: 5px;
+  background-color: #000000;
+  color: whitesmoke;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-family: "Sancreek", serif !important;
+  margin: 5px;
+  font-size: x-large;
 }
 
 .btn_sizeMin {
@@ -71,7 +92,7 @@ Button
 }
 
 .btn:hover {
-  background-color: #008183;
+  background-color: darkgray;
   text-decoration: none;
 }
 
@@ -110,6 +131,9 @@ Alert
   border-radius: 3px;
   color: #e01616;
   font-size: 0.8rem;
+  font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  font-size: x-large;
 }
 
 /* --------------------------------------------------------------------------------
@@ -125,6 +149,9 @@ Form Treatment
   background-color: #efefef;
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
+  font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  font-size: x-large;
 }
 
 input {
@@ -140,13 +167,17 @@ input {
 .rankTitles{
   display: flex;
   justify-content: space-evenly;
+  font-family: "Sancreek", serif;
+  font-weight: 400;
+  font-size: x-large;
 }
-
-
 
 .tooltip {
   position: relative;
   display: inline-block;
+    font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  font-size: x-large;
 }
 
 .tooltip .tooltiptext {
@@ -163,6 +194,9 @@ input {
   left: 50%;
   margin-left: -60px;
   justify-content: center;
+    font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  font-size: x-large;
 }
 
 .tooltip .tooltiptext::after {
@@ -190,7 +224,9 @@ input {
   flex-shrink: 0;
   width: 40px;
   height: 40px;
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  font-size: x-large;
   font-size: 1.25rem;
   line-height: 1;
   border-radius: 50%;
@@ -210,7 +246,9 @@ input {
   flex-shrink: 0;
   width: 40px;
   height: 40px;
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  font-size: x-large;
   font-size: 1.25rem;
   line-height: 1;
   border-radius: 50%;
@@ -236,7 +274,9 @@ input {
   flex-shrink: 0;
   width: 40px;
   height: 40px;
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  font-size: x-large;
   font-size: 1.25rem;
   line-height: 1;
   border-radius: 50%;
@@ -258,7 +298,9 @@ input {
   flex-shrink: 0;
   width: 40px;
   height: 40px;
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  font-size: x-large;
   font-size: 1.25rem;
   line-height: 1;
   border-radius: 50%;
@@ -284,7 +326,9 @@ input {
   flex-shrink: 0;
   width: 40px;
   height: 40px;
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  font-size: x-large;
   font-size: 1.25rem;
   line-height: 1;
   border-radius: 50%;
@@ -307,7 +351,9 @@ input {
   flex-shrink: 0;
   width: 40px;
   height: 40px;
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  font-size: x-large;
   font-size: 1.25rem;
   line-height: 1;
   border-radius: 50%;
@@ -319,5 +365,178 @@ input {
   max-height: 450px;
   width: 450px;
   height: 450px;
+}
+
+.header {
+  background-color: black;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-3 .MuiCard-root {
+  /* Add styles for the cards */
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 16px 16px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+  font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  font-size: x-large;
+}
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-3 .MuiCard-root:hover {
+  /* Add styles for the cards */
+  transform: scale(1.05);
+  background-color: #f5f5f5;
+  font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  font-size: x-large;
+}
+
+
+
+
+
+/* Material UI STYLES
+
+
+/* Target the parent element */
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-3 {
+  /* Add styles for the parent element if needed */
+  font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  font-size: x-large;
+  flex-direction: row;
+}
+
+/* Target the children of the parent element */
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-3 .MuiGrid-item {
+  /* Add styles for the grid items */
+  padding: 20px;
+  font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  font-size: x-large;
+}
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-3 .MuiCard-root {
+  /* Add styles for the cards */
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  font-size: x-large;
+}
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-3 .MuiCardMedia-root {
+  /* Add styles for the card media */
+  height: 200px;
+  object-fit: cover;
+    font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  font-size: x-large;
+}
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-3 .MuiCardContent-root {
+  /* Add styles for the card content */
+  padding: 16px;
+    font-family: "Sancreek", serif !important;
+  font-weight: 400;
+  font-size: x-large;
+}
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-3 .MuiTypography-root {
+  /* Add styles for the typography */
+  font-size: 1.2em;
+  font-family: "DM Serif Text", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-3 .MuiButton-root {
+  /* Add styles for the buttons */
+  background-color: #1976d2;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-3 .MuiButton-root:hover {
+  /* Add hover styles for the buttons */
+  background-color: #1565c0;
+}
+
+/* Porchfest titles google font */
+.ewert-regular {
+  font-family: "Ewert", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+ /* clear readable google font */
+.dm-serif-text-regular {
+  font-family: "DM Serif Text", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.dm-serif-text-regular-italic {
+  font-family: "DM Serif Text", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* italics class google font */
+.mogra-regular {
+  font-family: "Mogra", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+/* funky font google font */
+
+.kablammo {
+  font-family: "Kablammo", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "MORF" 0;
+}
+
+/* likely will pair with current fonts */
+.rye-regular {
+  font-family: "Rye", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* solid current fonts */
+.sancreek-regular {
+  font-family: "Sancreek", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.Grid-container{
+  display: "flex";
+  flex-direction: "row";
+  justify-content:"space-evenly" ;
+  align-items: center;
+}
+
+.Card-current {
+  box-shadow: 0 16px 16px rgba(0, 0, 0, 0.4) !important;
+  transition: transform 0.3s ease;
+  transform: scale(1.05);
+  max-width: 450;
+  max-height: 350;
+  width: 450;
+  height: 350;
+}
+
+.Card-current:hover {
+  transform: scale(1.05);
 }
 

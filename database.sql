@@ -163,3 +163,36 @@ ALTER TABLE "user" ALTER COLUMN ("password") varchar(80) NULL;
 24	Venue	LincolnAve	$2a$10$iUURFZdl3bQinLaaDnfh9ef1KtyyUektUkyoHk0W/O9Wsk8MsomGu	
 25	Venue	LyndaleAve	$2a$10$KthD6CTop.42D.QSXNyn8eefkVsQobXVJpsGxgu7dp8UShnMVhhsS	
 26	Venue	SummitAve	$2a$10$iSd.R6t2Fp1C05SZbBTdTOGsdwMxA1//IXdSgav74d10M4WCapy7m	
+
+5	2			388
+5	4			387
+7	4	3		382
+7	1	1		381
+7	3	11		380
+7	5	14		379
+7	2	16		378
+7	5	2		377
+7	4	15		376
+1	2			375
+1	5			374
+1	4			373
+1	5			372
+1	1			371
+1	5			370
+1	4			369
+1	5			368
+1	1			367
+1	4			366
+1	4		8	365
+22	1	13		360
+22	4	17		357
+22	4	5		356
+22	3	3		355
+22	5	1		354
+22	3	11		353
+22	4	14		352
+22	4	16		348
+22	4	12		345
+22	5	9		344
+22	4	2		342
+22	3	15		341

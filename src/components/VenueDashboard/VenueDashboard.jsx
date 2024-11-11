@@ -59,7 +59,7 @@ export default function VenueDashboard(){
   const [isPaused, setIsPaused] = useState(true);
   const [currentTrack, setCurrentTrack] = useState(null);
   const [deviceId, setDeviceId] = useState(null);
-  const [accessToken, setAccessToken] = useState(`BQCua1LhdeivbjktY7qV78QcH9HYgIC_rO2TOHSBQt5eh5WU82bBpWqIrcOaVu-bfG0HMz-74XYgo6eiLkjmKhqJ2RY2zfWZJiZUcda78fp7pPTOgsEfsdvY82QgokJH2RCvxHTkM17caFL3KHGM7YSHGsljmDOVZd1-dD3A2bOD_d_DtwucNvdrk0FLOX465m7bAXTAhSysxxUy
+  const [accessToken, setAccessToken] = useState(`BQBaW-u8MCUhUJnwbo6Huo4qx59GKQ4zlBN5X9ihQcJMvzIkUEjpf8bvfARFgTPTwTNlLhUGvLcwgO_Yu8hG04Mu449Q_gRq0awI15GNMSgc1ugp5t4jhwZm1HnINVTaSWspGVsNTW75vkeumEY4HHdCnxq4VdX8OuAlXlXSUMYyj_isL_HJdC_O7rAwQTGSe5nv0RwW6sitWsok
 `); 
  const [expandedBio, setExpandedBio] = useState(null);
 
@@ -76,7 +76,7 @@ useEffect(() => {
           getOAuthToken: cb => { 
             cb(accessToken);
              },
-          volume: 0.5,
+          volume: 0.25,
           robustness: 'SW_SECURE_CRYPTO'
       });
 

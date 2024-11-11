@@ -220,17 +220,7 @@ useEffect(() => {
     return moveDownIds.includes(id) ? {objectFit: 'cover', objectPosition: 'top'} : {}
   }
 
-  console.log("sorted artists a-z!!", sortedArtists)
-
-
-  const cardStyles = makeStyles(() => ({
-    root: card.styleOverrides.root,
-  }));
-
-  // font-family: "Ewert", serif;
-  // font-weight: 400;
-  // font-style: normal;
-
+ 
   return (
     
 
@@ -270,9 +260,7 @@ useEffect(() => {
       )
     
     }
-      {/* font-family: "Ewert", serif;
-  font-weight: 400;
-  font-style: normal; */}
+  
 
       <Grid container spacing={3}>
         {sortedArtists.map((item) => (

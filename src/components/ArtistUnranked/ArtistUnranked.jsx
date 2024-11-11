@@ -136,8 +136,6 @@ export default function ArtistUnranked(){
 
   const saveRating = (event) => {
     event.preventDefault();
-    // console.log(userId)
-    // console.log(rating)
 
     if(venueData.length === 0) return;
 
@@ -196,10 +194,6 @@ if(venueData.length === 0){
   return <p>No More Venues to Rate!</p>
 }
 
-
-
-
-    
     const StyledRating = styled(Rating)(({ theme }) => ({
       '& .MuiRating-iconEmpty .MuiSvgIcon-root': {
         color: theme.palette.secondary.main,
@@ -235,7 +229,6 @@ if(venueData.length === 0){
 
       return <span {...other}>
       <div>{customIcons[value].icon}</div>
-      {/* <h6>{customIcons[value].label}</h6> */}
       </span>;
     }
     

@@ -292,14 +292,3 @@ export default function VenueUnranked(){
     
           );
 };
-
-
-
-/* 
-
-
-
-
-
-
-*/

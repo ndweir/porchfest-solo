@@ -540,3 +540,6 @@ input {
   transform: scale(1.05);
 }
 
+div:where(.swal2-container) button:where(.swal2-styled){
+  font-family: "Sancreek", serif;
+}

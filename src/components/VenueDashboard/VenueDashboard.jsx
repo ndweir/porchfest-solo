@@ -59,8 +59,7 @@ export default function VenueDashboard(){
   const [isPaused, setIsPaused] = useState(true);
   const [currentTrack, setCurrentTrack] = useState(null);
   const [deviceId, setDeviceId] = useState(null);
-  const [accessToken, setAccessToken] = useState(`BQBaW-u8MCUhUJnwbo6Huo4qx59GKQ4zlBN5X9ihQcJMvzIkUEjpf8bvfARFgTPTwTNlLhUGvLcwgO_Yu8hG04Mu449Q_gRq0awI15GNMSgc1ugp5t4jhwZm1HnINVTaSWspGVsNTW75vkeumEY4HHdCnxq4VdX8OuAlXlXSUMYyj_isL_HJdC_O7rAwQTGSe5nv0RwW6sitWsok
-`); 
+  const accessToken = import.meta.env.VITE_SPOTIFY_WEBPLAYER_KEY; 
  const [expandedBio, setExpandedBio] = useState(null);
 
 useEffect(() => {

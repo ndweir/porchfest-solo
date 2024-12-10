@@ -1,124 +1,139 @@
-# Prime Solo Project - Starting Repo
+# PorchFest
 
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+PorchFest is a web application designed to connect bands and venues for the Uptown Porchfest music festival. This application empowers bands to find venues using Google Maps and allows venues to explore performers and preview their music through an integrated Spotify player.
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+This project uses **React**, **Redux**, **Express**, **Passport**, and **PostgreSQL** (a full list of dependencies can be found in `package.json`).
 
-## Use the Template for This Repository (Don't Clone)
+We **strongly** recommend following these instructions carefully to set up your development environment correctly.
 
-- Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account. Make the project `PUBLIC`!
+---
 
 ## Prerequisites
 
-Before you get started, make sure you have the following software installed on your computer:
+Before you begin, make sure the following software is installed on your computer:
 
 - [Node.js](https://nodejs.org/en)
 - [PostgreSQL](https://www.postgresql.org)
 - [Nodemon](https://nodemon.io)
 
+---
+
 ## Create Database and Table
 
-Create a new database called `prime_app` and create a `user` table:
+Create a new PostgreSQL database called `porchfest` and set up a `user` table:
 
-```SQL
+```sql
 CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
+    "username" VARCHAR(80) UNIQUE NOT NULL,
+    "password" VARCHAR(1000) NOT NULL
 );
 ```
 
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`.
+If you choose a different name for your database, update `server/modules/pool.js` to reflect the new name.
+
+---
 
 ## Development Setup Instructions
 
-- Run `npm install`.
-    - Be sure to take stock of `package.json` to see which dependencies you'll need to add.
-- Create a `.env` file at the root of the project and paste this line into the file:
+1. Run `npm install` to install dependencies. Review `package.json` for additional packages.
+2. Create a `.env` file in the project root and include the following variables:
 
 ```plaintext
 SERVER_SESSION_SECRET=superDuperSecret
+SPOTIFY_CLIENT_ID=
+SPOTIFY_CLIENT_SECRET=
+REACT_APP_GOOGLE_MAPS_API_KEY=
+VITE_GOOGLE_MAPS_API_KEY=
 ```
 
-While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [Password Generator Plus](https://passwordsgenerator.net). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
+Replace `superDuperSecret` with a secure random string. Use [Password Generator Plus](https://passwordsgenerator.net) for help. Populate the other variables with your Spotify API credentials and Google Maps API keys.
 
-- Start postgres if not running already by using opening up the [Postgres.app](https://postgresapp.com), or if using [Homebrew](https://brew.sh) you can use the command `brew services start postgresql`.
-- Run `npm run server` to start the server.
-- Run `npm run client` to start the client.
-- Navigate to `localhost:5173`.
+3. Start PostgreSQL if it's not already running. You can use the [Postgres.app](https://postgresapp.com) or Homebrew with the command:
+
+```sh
+brew services start postgresql
+```
+
+4. Start the server by running `npm run server`.
+5. Start the client by running `npm run client`.
+6. Navigate to `http://localhost:5173` to view the application.
+
+---
 
 ## Debugging
 
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
+To debug:
+1. Start the client-side separately with `npm run client`.
+2. Open the Debug tab in VSCode and select `Launch Program`.
+3. Press the green play button to start debugging.
 
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
+---
 
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
+## Testing with Postman
 
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
+Postman can be used to test API routes and verify backend functionality:
 
-## Testing Routes with Postman
+1. Start the server using `npm run server`.
+2. Open Postman and configure it to make requests to your local server (e.g., `http://localhost:5000`).
+3. Test different routes by providing appropriate headers, query parameters, or request bodies, depending on the API design.
+4. Use Postman to inspect responses and validate behavior during development.
 
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum.
+Postman also manages session cookies, which can be manually cleared if you need to reset your session during testing.
 
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
-
-1. Run `npm run server` to start the server.
-2. Import the sample routes JSON file [v2](./PostmanPrimeSoloRoutesv2.json) by clicking `Import` in Postman. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-   1. `POST /api/user/register` registers a new user, see body to change username/password.
-   2. `POST /api/user/login` will login a user, see body to change username/password.
-   3. `GET /api/user` will get user information, by default it's not very much.
-
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
-## Production Build
-
-Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
-
-- Start postgres if not running already by using opening up the [Postgres.app](https://postgresapp.com), or if using [Homebrew](https://brew.sh) you can use the command `brew services start postgresql`.
-- Run `npm start`.
-- Navigate to `localhost:5173`.
+---
 
 ## Lay of the Land
 
-There are a few videos linked below that show a walkthrough the client and sever setup to help acclimatize to the boilerplate. Please take some time to watch the videos in order to get a better understanding of what the boilerplate is like.
+The PorchFest repository is structured as follows:
 
-- [Initial Set](https://vimeo.com/453297271)
-- [Server Walkthrough](https://vimeo.com/453297212)
-- [Client Walkthrough](https://vimeo.com/453297124)
+- `src/`: Contains the React application code.
+- `public/`: Static assets for the client-side.
+- `build/`: Generated after building the project, contains production-ready code.
+- `server/`: Contains the Express server code.
 
-Directory Structure:
+Comments throughout the codebase provide guidance. Start with the following components:
 
-- `src/` contains the React application.
-- `public/` contains static assets for the client-side.
-- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site.
-- `server/` contains the Express App.
+- `src/components/App/App.js`
+- `src/components/Nav/Nav.js`
+- `src/components/LoginPage/LoginPage.js`
+- `src/components/RegisterPage/RegisterPage.js`
+- `src/components/ProtectedRoute/ProtectedRoute.js`
 
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
+---
 
-- src/components
-  - App/App
-  - Footer/Footer
-  - Nav/Nav
-  - AboutPage/AboutPage
-  - InfoPage/InfoPage
-  - UserPage/UserPage
-  - LoginPage/LoginPage
-  - RegisterPage/RegisterPage
-  - LogOutButton/LogOutButton
-  - ProtectedRoute/ProtectedRoute
+## Version 2.0 in Progress
 
-## Deployment
+I am collaborating with the Uptown Porchfest organizer to develop **Version 2.0**. The updated version will feature enhanced functionality and a user-friendly interface for both bands and venues. We aim to launch this version to new users by **August 2025**!
 
-1. Create a new Heroku project.
-1. Link the Heroku project to the project GitHub Repo.
-1. Create an Heroku Postgres database.
-1. Connect to the Heroku Postgres database from Postico.
-1. Create the necessary tables.
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security.
-1. In the deploy section, select manual deploy.
+### Planned Features for Version 2.0
+- **Band Features**:
+  - Cancel applications.
+  - View assigned porch details.
+  - Select preferred times to perform.
+  - Specify any required musical equipment.
+- **Porch Features**:
+  - View assigned bands.
+  - Receive notifications about new band applications.
+  - Select preferred genres for performances.
+  - Assign bands to specific time slots.
+- **Admin Enhancements**:
+  - Assign bands to porches with specific times.
+  - Remove bands from porches.
+  - Export lists of bands and porch assignments.
+  - View a schedule of performances.
+- **Public App**: A public-facing platform showcasing venues and artists, with Spotify Web Player integration for music previews.
+- **Email Notifications**: Automated emails for application confirmations and updates.
 
-## Update Documentation
+These features aim to provide a seamless experience for all users and improve overall event management.
 
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2.
+---
+
+## Version 3 and Beyond
+
+Looking ahead to **Version 3**, the focus will expand to include:
+
+- **Mobile App**: A mobile app with an integrated Google Maps feature to help users navigate to venues on the day of the event.
+- **Advanced Band-Porch Matching**: Allow porches to select bands based on detailed preferences and assign multiple performances at different times.
+- **Enhanced Communication**: Messaging capabilities between bands and porches for coordination.
+- **Local Network**: Porches can view and contact other nearby hosting porches to collaborate.
